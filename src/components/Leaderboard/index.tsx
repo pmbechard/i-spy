@@ -1,7 +1,7 @@
 import React from 'react';
 
-const index = () => {
-  return <div>Scoreboard</div>;
+const Leaderboard = () => {
+  return <div>Leaderboard</div>;
 };
 
-export default index;
+export default Leaderboard;
