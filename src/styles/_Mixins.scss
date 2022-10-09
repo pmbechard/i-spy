@@ -1,0 +1,18 @@
+@mixin fCentre($direction: row) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin hoverActive {
+  opacity: 0.8;
+  transition: $transition;
+
+  &:hover {
+    opacity: 1;
+  }
+  &:active {
+    transform: scale(0.99);
+  }
+}

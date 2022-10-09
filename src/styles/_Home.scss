@@ -1,0 +1,31 @@
+section {
+  background-color: #b9b9b9;
+  height: $bodyHeight;
+
+  .levels-area {
+    width: 100vw;
+    @include fCentre();
+    gap: 5vw;
+
+    .level-1 {
+      background-color: rgb(59, 158, 59);
+    }
+
+    .level-2 {
+      background-color: rgb(216, 213, 49);
+    }
+
+    .level-3 {
+      background-color: rgb(216, 49, 49);
+    }
+
+    .level-card {
+      width: 25vw;
+      text-align: center;
+      border: 3px solid $darkest;
+      height: 30vw;
+      border-radius: 8px;
+      @include hoverActive;
+    }
+  }
+}

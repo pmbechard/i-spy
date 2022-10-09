@@ -1,4 +1,23 @@
 @import-normalize;
 
+@import './styles/Fonts';
+@import './styles/Variables';
+@import './styles/Mixins';
+
 @import './styles/Header';
+@import './styles/Home';
 @import './styles/Footer';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: $bodyFont;
+  color: $darkest;
+  overscroll-behavior-y: none;
+}
+
+.link {
+  text-decoration: none;
+}

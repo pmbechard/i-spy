@@ -1,1 +1,40 @@
+header {
+  aspect-ratio: 900/600;
+  width: 100%;
+  height: $headerHeight;
+  background-image: url('../img/header-bg.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 
+  @include fCentre();
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 40px 60px;
+
+  button {
+    padding: 10px 20px;
+    background: $lightest;
+    border: 1px solid $darkest;
+    color: $darkest;
+    font-weight: 900;
+    border-radius: 8px;
+    cursor: pointer;
+    @include hoverActive;
+  }
+
+  .header-title {
+    font-size: 56px;
+    font-family: $headerFont;
+    color: #ededed;
+  }
+
+  .signed-in {
+    @include fCentre();
+    gap: 40px;
+
+    p {
+      color: $light;
+    }
+  }
+}
