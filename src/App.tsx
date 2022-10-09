@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.scss';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Home from './components/Home';
+import Leaderboard from './components/Leaderboard';
+import Level from './components/Level';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path='/1' element={<Level level={1} />} />
+        <Route path='/2' element={<Level level={2} />} />
+        <Route path='/3' element={<Level level={3} />} />
+        <Route path='/leaderboard' element={<Leaderboard />} />
+        <Route path='*' element={<Home />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
