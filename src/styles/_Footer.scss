@@ -1,4 +1,14 @@
 footer {
   background-color: #404040;
   height: $footerHeight;
+  @include fCentre();
+  color: $light;
+  font-size: 14px;
+
+  img {
+    padding: 0 10px;
+    height: 20px;
+    width: auto;
+    @include hoverActive();
+  }
 }

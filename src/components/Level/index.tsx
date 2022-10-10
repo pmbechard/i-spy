@@ -24,7 +24,7 @@ const Level: React.FC<Props> = ({ level }) => {
   return (
     <>
       <div>Level {level}</div>
-      <img src={getImg} alt='' />
+      <img src={getImg} alt='' className='level-img' />
     </>
   );
 };

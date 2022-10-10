@@ -8,6 +8,7 @@
 @mixin hoverActive {
   opacity: 0.8;
   transition: $transition;
+  cursor: pointer;
 
   &:hover {
     opacity: 1;

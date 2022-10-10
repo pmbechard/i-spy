@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
+@import-normalize;
+header {
+  aspect-ratio: 900/600;
+  width: 100%;
+  height: 30vh;
+  background-image: url("../img/header-bg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 40px 60px;
+}
+header button {
+  padding: 10px 20px;
+  background: #ededed;
+  border: 1px solid #2e2e2e;
+  color: #2e2e2e;
+  font-weight: 900;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
+  cursor: pointer;
+}
+header button:hover {
+  opacity: 1;
+}
+header button:active {
+  transform: scale(0.99);
+}
+header .header-title {
+  font-size: 56px;
+  font-family: "Alata", sans-serif;
+  color: #ededed;
+}
+header .signed-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 40px;
+}
+header .signed-in p {
+  color: #b9b9b9;
+}
+
+section {
+  background-color: #b9b9b9;
+  height: 65vh;
+}
+section .levels-area {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 5vw;
+}
+section .levels-area .level-1 {
+  background-color: rgb(59, 158, 59);
+}
+section .levels-area .level-2 {
+  background-color: rgb(216, 213, 49);
+}
+section .levels-area .level-3 {
+  background-color: rgb(216, 49, 49);
+}
+section .levels-area .level-card {
+  width: 25vw;
+  text-align: center;
+  border: 3px solid #2e2e2e;
+  height: 30vw;
+  border-radius: 8px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
+  cursor: pointer;
+}
+section .levels-area .level-card:hover {
+  opacity: 1;
+}
+section .levels-area .level-card:active {
+  transform: scale(0.99);
+}
+
+.level-img {
+  max-width: 100vw;
+}
+
+footer {
+  background-color: #404040;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  color: #b9b9b9;
+  font-size: 14px;
+}
+footer img {
+  padding: 0 10px;
+  height: 20px;
+  width: auto;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
+  cursor: pointer;
+}
+footer img:hover {
+  opacity: 1;
+}
+footer img:active {
+  transform: scale(0.99);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: "Arial", sans-serif;
+  color: #2e2e2e;
+  overscroll-behavior-y: none;
+}
+
+.link {
+  text-decoration: none;
+}/*# sourceMappingURL=App.css.map */
