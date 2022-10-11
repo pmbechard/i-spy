@@ -19,21 +19,21 @@ const Level: React.FC<Props> = ({ level }) => {
       }
     };
     fetchImg();
-  }, []);
+  }, [level]);
 
   const handleBoardClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => {
     const rect = e.currentTarget.getBoundingClientRect();
     console.log(
-      e.clientX / e.currentTarget.offsetWidth,
-      (e.clientY - rect.top) / (rect.bottom - rect.top)
+      ((e.clientX / e.currentTarget.offsetWidth) * 100).toFixed(0),
+      (((e.clientY - rect.top) / (rect.bottom - rect.top)) * 100).toFixed(0)
     );
   };
 
   return (
     <div className='level-container'>
-      <div>Level {level}</div>
+      <div className='level-info'>Level {level}</div>
       <div className='gameboard' onClick={(e) => handleBoardClick(e)}>
         <img src={getImg} alt='' className='level-img' />
       </div>

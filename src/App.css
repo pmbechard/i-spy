@@ -89,10 +89,21 @@ section .levels-area .level-card:active {
 }
 
 .level-container {
-  background-color: #ededed;
+  background-color: #b9b9b9;
 }
-.level-container .level-img {
+.level-container .level-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.level-container .gameboard {
+  margin: 0;
+  padding: 0;
+}
+.level-container .gameboard .level-img {
   max-width: 100vw;
+  display: block;
 }
 
 footer {
