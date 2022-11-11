@@ -17,24 +17,34 @@ import {
   signOut,
   setPersistence,
   browserSessionPersistence,
+  onAuthStateChanged,
 } from 'firebase/auth';
 
 function App() {
   const [getUserInfo, setUserInfo] = useState<User | null>(null);
-  const userPersistence = getAuth().currentUser;
+  const [, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
-    setUserInfo(userPersistence);
-  }, [userPersistence]);
+    const auth = getAuth();
+    const listener = onAuthStateChanged(auth, async (user) => {
+      setIsAuthenticated(!!user);
+      setUserInfo(getAuth().currentUser);
+    });
+
+    return () => {
+      listener();
+    };
+  }, []);
 
   const signIn = async () => {
     const auth = getAuth();
+    let user: User;
 
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
         const provider = new GoogleAuthProvider();
         return signInWithPopup(auth, provider).then((result) => {
-          const user = result.user;
+          user = result.user;
           setUserInfo(user);
         });
       })
