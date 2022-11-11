@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { storage } from '../../firebase/firebase-config';
 import { ref, getDownloadURL } from 'firebase/storage';
+import Loading from '../Loading';
 
 interface Props {
   level: number;
@@ -8,15 +9,18 @@ interface Props {
 
 const Level: React.FC<Props> = ({ level }) => {
   const [getImg, setImg] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchImg = async () => {
+      setIsLoading(true);
       try {
         setImg(await getDownloadURL(ref(storage, `level-${level}.jpg`)));
       } catch (e) {
         // FIXME: Show loading error
         console.log(e);
       }
+      setIsLoading(false);
     };
     fetchImg();
   }, [level]);
@@ -33,9 +37,15 @@ const Level: React.FC<Props> = ({ level }) => {
 
   return (
     <div className='level-container'>
-      <div className='level-info'>Level {level}</div>
+      <div className='level-info'>
+        <h1>Level {level}</h1>
+      </div>
       <div className='gameboard' onClick={(e) => handleBoardClick(e)}>
-        <img src={getImg} alt='' className='level-img' />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <img src={getImg} alt='' className='level-img' />
+        )}
       </div>
     </div>
   );
