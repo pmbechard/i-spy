@@ -1,8 +1,7 @@
 .loading-icon-container {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: $bodyHeight;
+  @include fCentre();
 
   .lds-grid {
     display: inline-block;

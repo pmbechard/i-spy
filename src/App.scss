@@ -20,6 +20,29 @@
   overscroll-behavior-y: none;
 }
 
+button {
+  padding: 10px 20px;
+  background: $lightest;
+  border: 1px solid $darkest;
+  color: $darkest;
+  font-weight: 900;
+  border-radius: 8px;
+  cursor: pointer;
+  @include hoverActive;
+}
+
 .link {
   text-decoration: none;
+}
+
+.login-prompt {
+  height: $bodyHeight;
+  @include fCentre();
+
+  button {
+    padding: 40px 80px;
+    background-color: $darkest;
+    color: $lightest;
+    font-size: 24px;
+  }
 }

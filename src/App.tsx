@@ -74,11 +74,24 @@ function App() {
         signUserOut={signUserOut}
       />
       <Routes>
-        <Route path='/1' element={<Level level={1} />} />
-        <Route path='/2' element={<Level level={2} />} />
-        <Route path='/3' element={<Level level={3} />} />
-        <Route path='/leaderboard' element={<Leaderboard />} />
-        <Route path='*' element={<Home />} />
+        {getUserInfo ? (
+          <>
+            <Route path='/1' element={<Level level={1} />} />
+            <Route path='/2' element={<Level level={2} />} />
+            <Route path='/3' element={<Level level={3} />} />
+            <Route path='/leaderboard' element={<Leaderboard />} />
+            <Route path='*' element={<Home />} />
+          </>
+        ) : (
+          <Route
+            path=''
+            element={
+              <div className='login-prompt'>
+                <button onClick={signIn}>Sign in to play</button>
+              </div>
+            }
+          />
+        )}
       </Routes>
       <Footer />
     </BrowserRouter>
