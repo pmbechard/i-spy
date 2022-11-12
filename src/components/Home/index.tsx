@@ -1,19 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import lvl1Icon from '../../img/lvl-1.png';
+import lvl2Icon from '../../img/lvl-2.png';
+import lvl3Icon from '../../img/lvl-3.png';
+import lockedIcon from '../../img/locked.png';
 
 const Home = () => {
+  const [getCompletedLevels, setCompletedLevels] = useState<string[]>([]);
+
   return (
     <section>
+      <h2>Choose a level to begin:</h2>
       <div className='levels-area'>
-        <Link to='1' className='link level-card level-1'>
-          Level 1
+        <Link to='1' className='link level-btn'>
+          <img src={lvl1Icon} alt='' />
         </Link>
-        <Link to='2' className='link level-card level-2'>
-          Level 2
-        </Link>
-        <Link to='3' className='link level-card level-3'>
-          Level 3
-        </Link>
+        {getCompletedLevels.includes('1') ? (
+          <Link to='2' className='link level-btn'>
+            <img src={lvl2Icon} alt='' />
+          </Link>
+        ) : (
+          <div className='disabled-level-container'>
+            <img src={lvl2Icon} alt='' className='disabled-level' />
+            <img src={lockedIcon} alt='' className='level-status' />
+          </div>
+        )}
+        {getCompletedLevels.includes('2') ? (
+          <Link to='3' className='link level-btn'>
+            <img src={lvl3Icon} alt='' />
+          </Link>
+        ) : (
+          <div className='disabled-level-container'>
+            <img src={lvl3Icon} alt='' className='disabled-level' />
+            <img src={lockedIcon} alt='' className='level-status' />
+          </div>
+        )}
       </div>
       <Link to='leaderboard' className='link leaderboard-card'>
         Leaderboard

@@ -2,30 +2,31 @@ section {
   background-color: #b9b9b9;
   height: $bodyHeight;
 
+  h2 {
+    text-align: center;
+  }
+
   .levels-area {
     width: 100vw;
     @include fCentre();
     gap: 5vw;
 
-    .level-1 {
-      background-color: rgb(59, 158, 59);
+    .level-btn {
+      position: relative;
+      @include hoverActive();
     }
 
-    .level-2 {
-      background-color: rgb(216, 213, 49);
+    .disabled-level-container {
+      opacity: 0.4;
+      position: relative;
     }
 
-    .level-3 {
-      background-color: rgb(216, 49, 49);
-    }
-
-    .level-card {
-      width: 25vw;
-      text-align: center;
-      border: 3px solid $darkest;
-      height: 30vw;
-      border-radius: 8px;
-      @include hoverActive;
+    .level-status {
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
+      width: 32px;
+      height: auto;
     }
   }
 }
