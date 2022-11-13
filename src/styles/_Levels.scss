@@ -2,7 +2,18 @@
   background-color: $light;
 
   .level-info {
-    @include fCentre();
+    @include fCentre(column);
+    text-align: center;
+
+    .search-items {
+      @include fCentre();
+      gap: 40px;
+
+      .search-item {
+        font-weight: 900;
+        color: rgb(183, 38, 38);
+      }
+    }
   }
 
   .gameboard {

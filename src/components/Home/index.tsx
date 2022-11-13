@@ -7,7 +7,7 @@ import lockedIcon from '../../img/locked.png';
 import Leaderboard from '../Leaderboard';
 
 const Home = () => {
-  const [getCompletedLevels, setCompletedLevels] = useState<string[]>([]);
+  const [getCompletedLevels, setCompletedLevels] = useState<string[]>(['1']);
   const [getLeaderboardLevel, setLeaderboardLevel] = useState<string>('1');
 
   return (
