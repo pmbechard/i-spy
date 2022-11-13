@@ -1,32 +1,47 @@
 import React from 'react';
+import goldMedal from '../../img/gold.png';
+import silverMedal from '../../img/silver.png';
+import bronzeMedal from '../../img/bronze.png';
 
-const Leaderboard = () => {
+interface Props {
+  getLeaderboardLevel: string;
+}
+
+const Leaderboard: React.FC<Props> = ({ getLeaderboardLevel }) => {
   return (
     <div className='leaderboard-container'>
       <table>
         <thead>
           <tr>
-            <th colSpan={2}>Level 1</th>
-            <th colSpan={2}>Level 2</th>
-            <th colSpan={2}>Level 3</th>
-          </tr>
-          <tr>
-            <th>Name</th>
-            <th>Time</th>
-            <th>Name</th>
-            <th>Time</th>
+            <th>Ranking</th>
             <th>Name</th>
             <th>Time</th>
           </tr>
         </thead>
         <tbody>
           <tr>
+            {/* TODO: Implement fetch call here  */}
+            <td>
+              <img src={goldMedal} alt='' className='leaderboard-medal' />
+            </td>
             <td>User 1.1</td>
             <td>20.3s</td>
-            <td>User 2.1</td>
-            <td>23.4s</td>
-            <td>User 3.1</td>
-            <td>26.7s</td>
+          </tr>
+          <tr>
+            {/* TODO: Implement fetch call here  */}
+            <td>
+              <img src={silverMedal} alt='' className='leaderboard-medal' />
+            </td>
+            <td>User 1.2</td>
+            <td>21.3s</td>
+          </tr>
+          <tr>
+            {/* TODO: Implement fetch call here  */}
+            <td>
+              <img src={bronzeMedal} alt='' className='leaderboard-medal' />
+            </td>
+            <td>User 1.2</td>
+            <td>21.3s</td>
           </tr>
         </tbody>
       </table>

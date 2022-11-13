@@ -79,7 +79,6 @@ function App() {
             <Route path='/1' element={<Level level={1} />} />
             <Route path='/2' element={<Level level={2} />} />
             <Route path='/3' element={<Level level={3} />} />
-            <Route path='/leaderboard' element={<Leaderboard />} />
             <Route path='*' element={<Home />} />
           </>
         ) : (

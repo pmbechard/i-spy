@@ -8,6 +8,7 @@ import Leaderboard from '../Leaderboard';
 
 const Home = () => {
   const [getCompletedLevels, setCompletedLevels] = useState<string[]>([]);
+  const [getLeaderboardLevel, setLeaderboardLevel] = useState<string>('1');
 
   return (
     <section>
@@ -37,9 +38,33 @@ const Home = () => {
           </div>
         )}
       </div>
-      <Link to='leaderboard' className='link leaderboard-card'>
-        <Leaderboard />
-      </Link>
+      <div className='leaderboard-tabs'>
+        <div
+          className={`leaderboard-tab ${
+            getLeaderboardLevel === '1' && 'selected'
+          }`}
+          onClick={() => setLeaderboardLevel('1')}
+        >
+          Level 1
+        </div>
+        <div
+          className={`leaderboard-tab ${
+            getLeaderboardLevel === '2' && 'selected'
+          }`}
+          onClick={() => setLeaderboardLevel('2')}
+        >
+          Level 2
+        </div>
+        <div
+          className={`leaderboard-tab ${
+            getLeaderboardLevel === '3' && 'selected'
+          }`}
+          onClick={() => setLeaderboardLevel('3')}
+        >
+          Level 3
+        </div>
+      </div>
+      <Leaderboard getLeaderboardLevel={getLeaderboardLevel} />
     </section>
   );
 };

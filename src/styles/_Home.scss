@@ -15,6 +15,10 @@ section {
     .level-btn {
       position: relative;
       @include hoverActive();
+
+      &:hover {
+        transform: scale(1.03);
+      }
     }
 
     .disabled-level-container {
@@ -28,6 +32,38 @@ section {
       bottom: 5px;
       width: 32px;
       height: auto;
+    }
+  }
+
+  .leaderboard-tabs {
+    margin-top: 50px;
+    @include fCentre();
+
+    .leaderboard-tab {
+      @include hoverActive();
+      background-color: $dark;
+      padding: 10px 50px;
+      font-weight: bold;
+      color: $lightest;
+      border-left: 1px solid $darkest;
+      border-right: 1px solid $darkest;
+    }
+
+    .leaderboard-tab:nth-child(1) {
+      border: none;
+      border-top-left-radius: 8px;
+      border-right: 1px solid $darkest;
+    }
+
+    .leaderboard-tab:last-child {
+      border: none;
+      border-top-right-radius: 8px;
+      border-left: 1px solid $darkest;
+    }
+
+    .selected {
+      background-color: $lightest;
+      color: $dark;
     }
   }
 }

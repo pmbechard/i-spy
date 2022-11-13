@@ -1,14 +1,13 @@
 .leaderboard-container {
-  margin-top: 50px;
   @include fCentre();
 
   table {
     border-collapse: collapse;
-    width: 80vw;
+    width: 70vw;
 
     th,
     td {
-      border: 3px solid $darkest;
+      border-bottom: 3px solid $darkest;
       padding: 10px;
       text-align: center;
     }
@@ -18,16 +17,25 @@
       color: $dark;
     }
 
-    thead tr:nth-child(1) {
+    th:nth-child(n + 1),
+    td:nth-child(n + 1) {
+      width: 20%;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+      width: 60%;
+    }
+
+    .leaderboard-medal {
+      height: 40px;
+      width: auto;
+    }
+
+    thead tr {
       background-color: $darkest;
       th {
-        color: $lightest;
-      }
-    }
-    thead tr:nth-child(2) {
-      background-color: $dark;
-      th {
-        color: $lightest;
+        color: $light;
       }
     }
   }
