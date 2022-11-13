@@ -1,0 +1,34 @@
+.leaderboard-container {
+  margin-top: 50px;
+  @include fCentre();
+
+  table {
+    border-collapse: collapse;
+    width: 80vw;
+
+    th,
+    td {
+      border: 3px solid $darkest;
+      padding: 10px;
+      text-align: center;
+    }
+
+    td {
+      background-color: $light;
+      color: $dark;
+    }
+
+    thead tr:nth-child(1) {
+      background-color: $darkest;
+      th {
+        color: $lightest;
+      }
+    }
+    thead tr:nth-child(2) {
+      background-color: $dark;
+      th {
+        color: $lightest;
+      }
+    }
+  }
+}

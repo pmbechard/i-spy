@@ -4,6 +4,7 @@ import lvl1Icon from '../../img/lvl-1.png';
 import lvl2Icon from '../../img/lvl-2.png';
 import lvl3Icon from '../../img/lvl-3.png';
 import lockedIcon from '../../img/locked.png';
+import Leaderboard from '../Leaderboard';
 
 const Home = () => {
   const [getCompletedLevels, setCompletedLevels] = useState<string[]>([]);
@@ -37,7 +38,7 @@ const Home = () => {
         )}
       </div>
       <Link to='leaderboard' className='link leaderboard-card'>
-        Leaderboard
+        <Leaderboard />
       </Link>
     </section>
   );
