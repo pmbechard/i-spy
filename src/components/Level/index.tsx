@@ -7,13 +7,14 @@ import { doc, getDoc } from 'firebase/firestore';
 
 interface Props {
   level: string;
+  setCompletedLevels: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 interface ItemsObject {
   items: { name: string; location: number[] }[];
 }
 
-const Level: React.FC<Props> = ({ level }) => {
+const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
   const [getImg, setImg] = useState<string>('');
   const [getItems, setItems] = useState<ItemsObject>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -61,7 +62,7 @@ const Level: React.FC<Props> = ({ level }) => {
       <div className='level-info'>
         <h1>Level {level}</h1>
         <div className='search-info'>
-          You are looking for:
+          <h2>You are looking for...</h2>
           <div className='search-items'>
             {getItems &&
               getItems?.items.map((item) => {

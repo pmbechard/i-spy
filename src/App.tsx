@@ -21,6 +21,7 @@ import {
 
 function App() {
   const [getUserInfo, setUserInfo] = useState<User | null>(null);
+  const [getCompletedLevels, setCompletedLevels] = useState<string[]>(['1']);
   const [, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
@@ -75,10 +76,33 @@ function App() {
       <Routes>
         {getUserInfo ? (
           <>
-            <Route path='/1' element={<Level level={'1'} />} />
-            <Route path='/2' element={<Level level={'2'} />} />
-            <Route path='/3' element={<Level level={'3'} />} />
-            <Route path='*' element={<Home />} />
+            <Route
+              path='/1'
+              element={
+                <Level level={'1'} setCompletedLevels={setCompletedLevels} />
+              }
+            />
+            <Route
+              path='/2'
+              element={
+                <Level level={'2'} setCompletedLevels={setCompletedLevels} />
+              }
+            />
+            <Route
+              path='/3'
+              element={
+                <Level level={'3'} setCompletedLevels={setCompletedLevels} />
+              }
+            />
+            <Route
+              path='*'
+              element={
+                <Home
+                  getCompletedLevels={getCompletedLevels}
+                  setCompletedLevels={setCompletedLevels}
+                />
+              }
+            />
           </>
         ) : (
           <Route

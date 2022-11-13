@@ -5,13 +5,23 @@
     @include fCentre(column);
     text-align: center;
 
+    h2 {
+      padding: 20px;
+    }
+
     .search-items {
       @include fCentre();
       gap: 40px;
+      background-color: $dark;
+      width: 100vw;
+      padding: 20px 0;
 
       .search-item {
         font-weight: 900;
-        color: rgb(183, 38, 38);
+        color: $lightest;
+        background-color: rgb(133, 52, 52);
+        padding: 10px 20px;
+        border-radius: 8px;
       }
     }
   }

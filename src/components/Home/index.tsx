@@ -6,8 +6,12 @@ import lvl3Icon from '../../img/lvl-3.png';
 import lockedIcon from '../../img/locked.png';
 import Leaderboard from '../Leaderboard';
 
-const Home = () => {
-  const [getCompletedLevels, setCompletedLevels] = useState<string[]>(['1']);
+interface Props {
+  getCompletedLevels: string[];
+  setCompletedLevels: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const Home: React.FC<Props> = ({ getCompletedLevels, setCompletedLevels }) => {
   const [getLeaderboardLevel, setLeaderboardLevel] = useState<string>('1');
 
   return (
