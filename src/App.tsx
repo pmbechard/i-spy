@@ -6,7 +6,6 @@ import './App.scss';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './components/Home';
-import Leaderboard from './components/Leaderboard';
 import Level from './components/Level';
 
 import {

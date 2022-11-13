@@ -1,6 +1,8 @@
 section {
   background-color: #b9b9b9;
-  height: $bodyHeight;
+  height: calc($bodyHeight + 20vh);
+  @include fCentre(column);
+  justify-content: flex-start;
 
   h2 {
     text-align: center;
@@ -35,11 +37,15 @@ section {
     }
   }
 
-  .leaderboard-tabs {
+  h2 {
     margin-top: 50px;
+  }
+
+  .leaderboard-tabs {
     @include fCentre();
 
     .leaderboard-tab {
+      width: calc(70vw / 3);
       @include hoverActive();
       background-color: $dark;
       padding: 10px 50px;
@@ -47,6 +53,11 @@ section {
       color: $lightest;
       border-left: 1px solid $darkest;
       border-right: 1px solid $darkest;
+      text-align: center;
+
+      &:active {
+        transform: scale(1);
+      }
     }
 
     .leaderboard-tab:nth-child(1) {

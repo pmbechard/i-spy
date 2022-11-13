@@ -24,7 +24,7 @@ const Leaderboard: React.FC<Props> = ({ getLeaderboardLevel }) => {
             <td>
               <img src={goldMedal} alt='' className='leaderboard-medal' />
             </td>
-            <td>User 1.1</td>
+            <td>User {getLeaderboardLevel}.1</td>
             <td>20.3s</td>
           </tr>
           <tr>
@@ -32,7 +32,7 @@ const Leaderboard: React.FC<Props> = ({ getLeaderboardLevel }) => {
             <td>
               <img src={silverMedal} alt='' className='leaderboard-medal' />
             </td>
-            <td>User 1.2</td>
+            <td>User {getLeaderboardLevel}.2</td>
             <td>21.3s</td>
           </tr>
           <tr>
@@ -40,7 +40,7 @@ const Leaderboard: React.FC<Props> = ({ getLeaderboardLevel }) => {
             <td>
               <img src={bronzeMedal} alt='' className='leaderboard-medal' />
             </td>
-            <td>User 1.2</td>
+            <td>User {getLeaderboardLevel}.2</td>
             <td>21.3s</td>
           </tr>
         </tbody>

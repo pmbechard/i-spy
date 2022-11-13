@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <section>
-      <h2>Choose a level to begin:</h2>
+      <h2>Choose a level to play</h2>
       <div className='levels-area'>
         <Link to='1' className='link level-btn'>
           <img src={lvl1Icon} alt='' />
@@ -38,6 +38,7 @@ const Home = () => {
           </div>
         )}
       </div>
+      <h2>Check the high scores</h2>
       <div className='leaderboard-tabs'>
         <div
           className={`leaderboard-tab ${
