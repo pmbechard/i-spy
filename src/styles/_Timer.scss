@@ -1,0 +1,15 @@
+.timer-container {
+  position: fixed;
+  top: calc($headerHeight / 2);
+  right: 50px;
+  background-color: $lightest;
+  color: $darkest;
+  border: 5px solid $darkest;
+  border-radius: 50%;
+  font-size: 24px;
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  opacity: 0.8;
+  @include fCentre();
+}
