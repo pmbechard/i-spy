@@ -18,19 +18,22 @@ import {
   browserSessionPersistence,
   onAuthStateChanged,
 } from 'firebase/auth';
+import Loading from './components/Loading';
 
 function App() {
   const [getUserInfo, setUserInfo] = useState<User | null>(null);
   const [getCompletedLevels, setCompletedLevels] = useState<string[]>(['1']);
   const [, setIsAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const auth = getAuth();
     const listener = onAuthStateChanged(auth, async (user) => {
       setIsAuthenticated(!!user);
       setUserInfo(getAuth().currentUser);
+      setIsLoading(false);
     });
-
     return () => {
       listener();
     };
@@ -73,48 +76,52 @@ function App() {
         signIn={signIn}
         signUserOut={signUserOut}
       />
-      <Routes>
-        {getUserInfo ? (
-          <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Routes>
+          {getUserInfo ? (
+            <>
+              <Route
+                path='/1'
+                element={
+                  <Level level={'1'} setCompletedLevels={setCompletedLevels} />
+                }
+              />
+              <Route
+                path='/2'
+                element={
+                  <Level level={'2'} setCompletedLevels={setCompletedLevels} />
+                }
+              />
+              <Route
+                path='/3'
+                element={
+                  <Level level={'3'} setCompletedLevels={setCompletedLevels} />
+                }
+              />
+              <Route
+                path='*'
+                element={
+                  <Home
+                    getCompletedLevels={getCompletedLevels}
+                    setCompletedLevels={setCompletedLevels}
+                  />
+                }
+              />
+            </>
+          ) : (
             <Route
-              path='/1'
+              path=''
               element={
-                <Level level={'1'} setCompletedLevels={setCompletedLevels} />
+                <div className='login-prompt'>
+                  <button onClick={signIn}>Sign in to play</button>
+                </div>
               }
             />
-            <Route
-              path='/2'
-              element={
-                <Level level={'2'} setCompletedLevels={setCompletedLevels} />
-              }
-            />
-            <Route
-              path='/3'
-              element={
-                <Level level={'3'} setCompletedLevels={setCompletedLevels} />
-              }
-            />
-            <Route
-              path='*'
-              element={
-                <Home
-                  getCompletedLevels={getCompletedLevels}
-                  setCompletedLevels={setCompletedLevels}
-                />
-              }
-            />
-          </>
-        ) : (
-          <Route
-            path=''
-            element={
-              <div className='login-prompt'>
-                <button onClick={signIn}>Sign in to play</button>
-              </div>
-            }
-          />
-        )}
-      </Routes>
+          )}
+        </Routes>
+      )}
       <Footer />
     </BrowserRouter>
   );
