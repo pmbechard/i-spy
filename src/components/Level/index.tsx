@@ -5,14 +5,11 @@ import { ref, getDownloadURL } from 'firebase/storage';
 import Loading from '../Loading';
 import { doc, getDoc } from 'firebase/firestore';
 import Timer from '../Timer';
+import { ItemsObject } from '../Interfaces/Interfaces';
 
 interface Props {
   level: string;
   setCompletedLevels: React.Dispatch<React.SetStateAction<string[]>>;
-}
-
-interface ItemsObject {
-  items: { name: string; location: number[] }[];
 }
 
 const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {

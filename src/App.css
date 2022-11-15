@@ -16,24 +16,6 @@ header {
   justify-content: space-between;
   padding: 40px 60px;
 }
-header button {
-  padding: 10px 20px;
-  background: #ededed;
-  border: 1px solid #2e2e2e;
-  color: #2e2e2e;
-  font-weight: 900;
-  border-radius: 8px;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
-  cursor: pointer;
-}
-header button:hover {
-  opacity: 1;
-}
-header button:active {
-  transform: scale(0.99);
-}
 header .header-title {
   font-size: 56px;
   font-family: "Alata", sans-serif;
@@ -52,7 +34,16 @@ header .signed-in p {
 
 section {
   background-color: #b9b9b9;
-  height: 65vh;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+section h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 section .levels-area {
   width: 100vw;
@@ -62,30 +53,76 @@ section .levels-area {
   flex-direction: row;
   gap: 5vw;
 }
-section .levels-area .level-1 {
-  background-color: rgb(59, 158, 59);
-}
-section .levels-area .level-2 {
-  background-color: rgb(216, 213, 49);
-}
-section .levels-area .level-3 {
-  background-color: rgb(216, 49, 49);
-}
-section .levels-area .level-card {
-  width: 25vw;
-  text-align: center;
-  border: 3px solid #2e2e2e;
-  height: 30vw;
-  border-radius: 8px;
+section .levels-area .level-btn {
+  position: relative;
   opacity: 0.8;
   transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
   cursor: pointer;
 }
-section .levels-area .level-card:hover {
+section .levels-area .level-btn:hover {
   opacity: 1;
 }
-section .levels-area .level-card:active {
+section .levels-area .level-btn:active {
   transform: scale(0.99);
+}
+section .levels-area .level-btn:hover {
+  transform: scale(1.03);
+}
+section .levels-area .disabled-level-container {
+  opacity: 0.4;
+  position: relative;
+}
+section .levels-area .level-status {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  width: 32px;
+  height: auto;
+}
+section h2 {
+  margin-top: 50px;
+}
+section .leaderboard-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+section .leaderboard-tabs .leaderboard-tab {
+  width: 23.3333333333vw;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
+  cursor: pointer;
+  background-color: #404040;
+  padding: 10px 50px;
+  font-weight: bold;
+  color: #ededed;
+  border-left: 1px solid #2e2e2e;
+  border-right: 1px solid #2e2e2e;
+  text-align: center;
+}
+section .leaderboard-tabs .leaderboard-tab:hover {
+  opacity: 1;
+}
+section .leaderboard-tabs .leaderboard-tab:active {
+  transform: scale(0.99);
+}
+section .leaderboard-tabs .leaderboard-tab:active {
+  transform: scale(1);
+}
+section .leaderboard-tabs .leaderboard-tab:nth-child(1) {
+  border: none;
+  border-top-left-radius: 8px;
+  border-right: 1px solid #2e2e2e;
+}
+section .leaderboard-tabs .leaderboard-tab:last-child {
+  border: none;
+  border-top-right-radius: 8px;
+  border-left: 1px solid #2e2e2e;
+}
+section .leaderboard-tabs .selected {
+  background-color: #ededed;
+  color: #404040;
 }
 
 .level-container {
@@ -95,7 +132,28 @@ section .levels-area .level-card:active {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+.level-container .level-info h2 {
+  padding: 20px;
+}
+.level-container .level-info .search-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
+  gap: 40px;
+  background-color: #404040;
+  width: 100vw;
+  padding: 20px 0;
+}
+.level-container .level-info .search-items .search-item {
+  font-weight: 900;
+  color: #ededed;
+  background-color: rgb(133, 52, 52);
+  padding: 10px 20px;
+  border-radius: 8px;
 }
 .level-container .gameboard {
   margin: 0;
@@ -104,6 +162,45 @@ section .levels-area .level-card:active {
 .level-container .gameboard .level-img {
   max-width: 100vw;
   display: block;
+}
+
+.leaderboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.leaderboard-container table {
+  border-collapse: collapse;
+  width: 70vw;
+}
+.leaderboard-container table th,
+.leaderboard-container table td {
+  border-bottom: 3px solid #2e2e2e;
+  padding: 10px;
+  text-align: center;
+}
+.leaderboard-container table td {
+  background-color: #b9b9b9;
+  color: #404040;
+}
+.leaderboard-container table th:nth-child(n+1),
+.leaderboard-container table td:nth-child(n+1) {
+  width: 20%;
+}
+.leaderboard-container table th:nth-child(2),
+.leaderboard-container table td:nth-child(2) {
+  width: 60%;
+}
+.leaderboard-container table .leaderboard-medal {
+  height: 40px;
+  width: auto;
+}
+.leaderboard-container table thead tr {
+  background-color: #2e2e2e;
+}
+.leaderboard-container table thead tr th {
+  color: #b9b9b9;
 }
 
 footer {
@@ -131,6 +228,119 @@ footer img:active {
   transform: scale(0.99);
 }
 
+.loading-icon-container {
+  width: 100%;
+  height: 65vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.loading-icon-container .lds-grid {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.loading-icon-container .lds-grid div {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #404040;
+  -webkit-animation: lds-grid 1.2s linear infinite;
+          animation: lds-grid 1.2s linear infinite;
+}
+.loading-icon-container .lds-grid div:nth-child(1) {
+  top: 8px;
+  left: 8px;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+}
+.loading-icon-container .lds-grid div:nth-child(2) {
+  top: 8px;
+  left: 32px;
+  -webkit-animation-delay: -0.4s;
+          animation-delay: -0.4s;
+}
+.loading-icon-container .lds-grid div:nth-child(3) {
+  top: 8px;
+  left: 56px;
+  -webkit-animation-delay: -0.8s;
+          animation-delay: -0.8s;
+}
+.loading-icon-container .lds-grid div:nth-child(4) {
+  top: 32px;
+  left: 8px;
+  -webkit-animation-delay: -0.4s;
+          animation-delay: -0.4s;
+}
+.loading-icon-container .lds-grid div:nth-child(5) {
+  top: 32px;
+  left: 32px;
+  -webkit-animation-delay: -0.8s;
+          animation-delay: -0.8s;
+}
+.loading-icon-container .lds-grid div:nth-child(6) {
+  top: 32px;
+  left: 56px;
+  -webkit-animation-delay: -1.2s;
+          animation-delay: -1.2s;
+}
+.loading-icon-container .lds-grid div:nth-child(7) {
+  top: 56px;
+  left: 8px;
+  -webkit-animation-delay: -0.8s;
+          animation-delay: -0.8s;
+}
+.loading-icon-container .lds-grid div:nth-child(8) {
+  top: 56px;
+  left: 32px;
+  -webkit-animation-delay: -1.2s;
+          animation-delay: -1.2s;
+}
+.loading-icon-container .lds-grid div:nth-child(9) {
+  top: 56px;
+  left: 56px;
+  -webkit-animation-delay: -1.6s;
+          animation-delay: -1.6s;
+}
+@-webkit-keyframes lds-grid {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+@keyframes lds-grid {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.timer-container {
+  position: fixed;
+  top: 15vh;
+  right: 50px;
+  background-color: #ededed;
+  color: #2e2e2e;
+  border: 5px solid #2e2e2e;
+  border-radius: 50%;
+  font-size: 24px;
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -141,6 +351,39 @@ footer img:active {
   overscroll-behavior-y: none;
 }
 
+button {
+  padding: 10px 20px;
+  background: #ededed;
+  border: 1px solid #2e2e2e;
+  color: #2e2e2e;
+  font-weight: 900;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 1;
+}
+button:active {
+  transform: scale(0.99);
+}
+
 .link {
   text-decoration: none;
+}
+
+.login-prompt {
+  height: 65vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.login-prompt button {
+  padding: 40px 80px;
+  background-color: #2e2e2e;
+  color: #ededed;
+  font-size: 24px;
 }/*# sourceMappingURL=App.css.map */

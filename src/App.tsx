@@ -19,12 +19,16 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import Loading from './components/Loading';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from './firebase/firebase-config';
+import { ScoresObject } from './components/Interfaces/Interfaces';
 
 function App() {
   const [getUserInfo, setUserInfo] = useState<User | null>(null);
   const [getCompletedLevels, setCompletedLevels] = useState<string[]>(['1']);
   const [, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [getHighScores, setHighScores] = useState<ScoresObject[]>();
 
   useEffect(() => {
     setIsLoading(true);
@@ -67,6 +71,24 @@ function App() {
         console.log(error);
         setUserInfo(null);
       });
+  };
+
+  const fetchHighScores = async () => {
+    // TODO:
+    try {
+      const highScores: ScoresObject[] = [];
+      for (let i = 1; i <= 3; i++) {
+        const docRef = doc(db, 'levels', `${i}`);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          highScores.push(docSnap.data() as ScoresObject);
+        }
+      }
+      setHighScores(highScores);
+    } catch (e) {
+      // FIXME: Loading error
+      console.log(e);
+    }
   };
 
   return (
