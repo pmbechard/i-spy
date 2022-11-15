@@ -1,13 +1,34 @@
-import React from 'react';
-import goldMedal from '../../img/gold.png';
-import silverMedal from '../../img/silver.png';
-import bronzeMedal from '../../img/bronze.png';
+import React, { useEffect, useState } from 'react';
+import first from '../../img/gold.png';
+import second from '../../img/silver.png';
+import third from '../../img/bronze.png';
+import { ScoresObject } from '../Interfaces/Interfaces';
+import Loading from '../Loading';
 
 interface Props {
   getLeaderboardLevel: string;
+  getHighScores:
+    | {
+        level: string;
+        scores: ScoresObject;
+      }[]
+    | undefined;
 }
 
-const Leaderboard: React.FC<Props> = ({ getLeaderboardLevel }) => {
+const Leaderboard: React.FC<Props> = ({
+  getLeaderboardLevel,
+  getHighScores,
+}) => {
+  const [currentScores, setCurrentScores] = useState<ScoresObject>();
+
+  useEffect(() => {
+    setCurrentScores(
+      getHighScores?.filter((scores) => scores.level === getLeaderboardLevel)[0]
+        .scores
+    );
+  }, [getHighScores, getLeaderboardLevel]);
+
+  console.table();
   return (
     <div className='leaderboard-container'>
       <table>
@@ -19,30 +40,25 @@ const Leaderboard: React.FC<Props> = ({ getLeaderboardLevel }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            {/* TODO: Implement fetch call here  */}
-            <td>
-              <img src={goldMedal} alt='' className='leaderboard-medal' />
-            </td>
-            <td>User {getLeaderboardLevel}.1</td>
-            <td>20.3s</td>
-          </tr>
-          <tr>
-            {/* TODO: Implement fetch call here  */}
-            <td>
-              <img src={silverMedal} alt='' className='leaderboard-medal' />
-            </td>
-            <td>User {getLeaderboardLevel}.2</td>
-            <td>21.3s</td>
-          </tr>
-          <tr>
-            {/* TODO: Implement fetch call here  */}
-            <td>
-              <img src={bronzeMedal} alt='' className='leaderboard-medal' />
-            </td>
-            <td>User {getLeaderboardLevel}.2</td>
-            <td>21.3s</td>
-          </tr>
+          {currentScores &&
+            currentScores?.highScores.map((score) => {
+              return (
+                <tr>
+                  <td>
+                    <img src={score.position} alt='' />
+                  </td>
+                  <td>{score.username}</td>
+                  <td>{score.time}</td>
+                </tr>
+              );
+            })}
+          {/* <tr>
+              <td>
+                <img src={score.position} alt='' />
+              </td>
+              <td>{score.username}</td>
+              <td>{score.time}</td>
+            </tr> */}
         </tbody>
       </table>
     </div>

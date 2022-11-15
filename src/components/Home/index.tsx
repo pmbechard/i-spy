@@ -5,13 +5,24 @@ import lvl2Icon from '../../img/lvl-2.png';
 import lvl3Icon from '../../img/lvl-3.png';
 import lockedIcon from '../../img/locked.png';
 import Leaderboard from '../Leaderboard';
+import { ScoresObject } from '../Interfaces/Interfaces';
 
 interface Props {
   getCompletedLevels: string[];
   setCompletedLevels: React.Dispatch<React.SetStateAction<string[]>>;
+  getHighScores:
+    | {
+        level: string;
+        scores: ScoresObject;
+      }[]
+    | undefined;
 }
 
-const Home: React.FC<Props> = ({ getCompletedLevels, setCompletedLevels }) => {
+const Home: React.FC<Props> = ({
+  getCompletedLevels,
+  setCompletedLevels,
+  getHighScores,
+}) => {
   const [getLeaderboardLevel, setLeaderboardLevel] = useState<string>('1');
 
   return (
@@ -69,7 +80,10 @@ const Home: React.FC<Props> = ({ getCompletedLevels, setCompletedLevels }) => {
           Level 3
         </div>
       </div>
-      <Leaderboard getLeaderboardLevel={getLeaderboardLevel} />
+      <Leaderboard
+        getLeaderboardLevel={getLeaderboardLevel}
+        getHighScores={getHighScores}
+      />
     </section>
   );
 };

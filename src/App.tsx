@@ -28,10 +28,12 @@ function App() {
   const [getCompletedLevels, setCompletedLevels] = useState<string[]>(['1']);
   const [, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [getHighScores, setHighScores] = useState<ScoresObject[]>();
+  const [getHighScores, setHighScores] =
+    useState<{ level: string; scores: ScoresObject }[]>();
 
   useEffect(() => {
     setIsLoading(true);
+    fetchHighScores();
     const auth = getAuth();
     const listener = onAuthStateChanged(auth, async (user) => {
       setIsAuthenticated(!!user);
@@ -74,14 +76,20 @@ function App() {
   };
 
   const fetchHighScores = async () => {
-    // TODO:
+    // FIXME: this is foobar'd somewhere along the way...
+    // probably among the interfaces -- keeps getting a
+    // "TypeError: Cannot read properties of undefined (reading 'map')
+    // at Leaderboard?
     try {
-      const highScores: ScoresObject[] = [];
+      const highScores: { level: string; scores: ScoresObject }[] = [];
       for (let i = 1; i <= 3; i++) {
         const docRef = doc(db, 'levels', `${i}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          highScores.push(docSnap.data() as ScoresObject);
+          highScores.push({
+            level: `${i}`,
+            scores: docSnap.data().highScores as ScoresObject,
+          });
         }
       }
       setHighScores(highScores);
@@ -128,6 +136,7 @@ function App() {
                   <Home
                     getCompletedLevels={getCompletedLevels}
                     setCompletedLevels={setCompletedLevels}
+                    getHighScores={getHighScores}
                   />
                 }
               />
