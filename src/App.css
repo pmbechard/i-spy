@@ -117,7 +117,10 @@ section h2 {
   margin: 0;
   padding: 0;
 }
-.level-container .gameboard .level-img {
+.level-container .gameboard .game-img-container {
+  position: relative;
+}
+.level-container .gameboard .game-img-container .level-img {
   max-width: 100vw;
   display: block;
 }

@@ -6,6 +6,7 @@ import Loading from '../Loading';
 import { doc, getDoc } from 'firebase/firestore';
 import Timer from '../Timer';
 import { ItemsObject } from '../Interfaces/Interfaces';
+import ClickMenu from './ClickMenu';
 
 interface Props {
   level: string;
@@ -17,6 +18,8 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
   const [getItems, setItems] = useState<ItemsObject>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(false);
+  const [getClickPos, setClickPos] = useState<number[]>([]);
+  const [clickMenuIsHidden, setClickMenuIsHidden] = useState<boolean>(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -55,11 +58,19 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
   const handleBoardClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => {
+    if (!clickMenuIsHidden) {
+      setClickMenuIsHidden(true);
+      return;
+    }
     const rect = e.currentTarget.getBoundingClientRect();
-    console.log(
-      ((e.clientX / e.currentTarget.offsetWidth) * 100).toFixed(0),
+    let x = parseInt(
+      ((e.clientX / e.currentTarget.offsetWidth) * 100).toFixed(0)
+    );
+    let y = parseInt(
       (((e.clientY - rect.top) / (rect.bottom - rect.top)) * 100).toFixed(0)
     );
+    setClickPos([x, y]);
+    setClickMenuIsHidden(false);
   };
 
   return (
@@ -85,7 +96,10 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
           {isLoading ? (
             <Loading />
           ) : (
-            <img src={getImg} alt='' className='level-img' />
+            <div className='game-img-container'>
+              <img src={getImg} alt='' className='level-img' />
+              {!clickMenuIsHidden && <ClickMenu coords={getClickPos} />}
+            </div>
           )}
         </div>
       </div>
