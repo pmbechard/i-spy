@@ -6,14 +6,11 @@ import Loading from '../Loading';
 import { ScoreCollection, ScoreObject } from '../Interfaces/Interfaces';
 
 interface Props {
-  getLeaderboardLevel: string;
   getHighScores: ScoreCollection[] | undefined;
 }
 
-const Leaderboard: React.FC<Props> = ({
-  getLeaderboardLevel,
-  getHighScores,
-}) => {
+const Leaderboard: React.FC<Props> = ({ getHighScores }) => {
+  const [getLeaderboardLevel, setLeaderboardLevel] = useState<string>('1');
   const [currentScores, setCurrentScores] = useState<
     ScoreObject[] | undefined
   >();
@@ -34,38 +31,65 @@ const Leaderboard: React.FC<Props> = ({
 
   return (
     <div className='leaderboard-container'>
-
-          {currentScores ? (
-                  <table>
-                  <thead>
-                    <tr>
-                      <th>Ranking</th>
-                      <th>Name</th>
-                      <th>Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-            {currentScores?.map((score) => {
-              return (
-                <tr key={`${getLeaderboardLevel}-${score.position}`}>
-                  <td>
-                    <img
-                      src={getIcon(score.position)}
-                      alt=''
-                      className='leaderboard-medal'
-                    />
-                  </td>
-                  <td>{score.username}</td>
-                  <td>{score.time}</td>
-                </tr>
-              );
-            })}
+      <h2>Check the high scores</h2>
+      {currentScores ? (
+        <>
+          <div className='leaderboard-tabs'>
+            <div
+              className={`leaderboard-tab ${
+                getLeaderboardLevel === '1' && 'selected'
+              }`}
+              onClick={() => setLeaderboardLevel('1')}
+            >
+              Level 1
+            </div>
+            <div
+              className={`leaderboard-tab ${
+                getLeaderboardLevel === '2' && 'selected'
+              }`}
+              onClick={() => setLeaderboardLevel('2')}
+            >
+              Level 2
+            </div>
+            <div
+              className={`leaderboard-tab ${
+                getLeaderboardLevel === '3' && 'selected'
+              }`}
+              onClick={() => setLeaderboardLevel('3')}
+            >
+              Level 3
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Ranking</th>
+                <th>Name</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentScores?.map((score) => {
+                return (
+                  <tr key={`${getLeaderboardLevel}-${score.position}`}>
+                    <td>
+                      <img
+                        src={getIcon(score.position)}
+                        alt=''
+                        className='leaderboard-medal'
+                      />
+                    </td>
+                    <td>{score.username}</td>
+                    <td>{score.time}</td>
+                  </tr>
+                );
+              })}
             </tbody>
-            </table>
-          ) : (
-            <Loading />
-          )}
-
+          </table>
+        </>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 };

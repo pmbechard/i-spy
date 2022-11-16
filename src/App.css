@@ -82,48 +82,6 @@ section .levels-area .level-status {
 section h2 {
   margin-top: 50px;
 }
-section .leaderboard-tabs {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-}
-section .leaderboard-tabs .leaderboard-tab {
-  width: 23.3333333333vw;
-  opacity: 0.8;
-  transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
-  cursor: pointer;
-  background-color: #404040;
-  padding: 10px 50px;
-  font-weight: bold;
-  color: #ededed;
-  border-left: 1px solid #2e2e2e;
-  border-right: 1px solid #2e2e2e;
-  text-align: center;
-}
-section .leaderboard-tabs .leaderboard-tab:hover {
-  opacity: 1;
-}
-section .leaderboard-tabs .leaderboard-tab:active {
-  transform: scale(0.99);
-}
-section .leaderboard-tabs .leaderboard-tab:active {
-  transform: scale(1);
-}
-section .leaderboard-tabs .leaderboard-tab:nth-child(1) {
-  border: none;
-  border-top-left-radius: 8px;
-  border-right: 1px solid #2e2e2e;
-}
-section .leaderboard-tabs .leaderboard-tab:last-child {
-  border: none;
-  border-top-right-radius: 8px;
-  border-left: 1px solid #2e2e2e;
-}
-section .leaderboard-tabs .selected {
-  background-color: #ededed;
-  color: #404040;
-}
 
 .level-container {
   background-color: #b9b9b9;
@@ -168,7 +126,49 @@ section .leaderboard-tabs .selected {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+.leaderboard-container .leaderboard-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
+}
+.leaderboard-container .leaderboard-tabs .leaderboard-tab {
+  width: 23.3333333333vw;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
+  cursor: pointer;
+  background-color: #404040;
+  padding: 10px 50px;
+  font-weight: bold;
+  color: #ededed;
+  border-left: 1px solid #2e2e2e;
+  border-right: 1px solid #2e2e2e;
+  text-align: center;
+}
+.leaderboard-container .leaderboard-tabs .leaderboard-tab:hover {
+  opacity: 1;
+}
+.leaderboard-container .leaderboard-tabs .leaderboard-tab:active {
+  transform: scale(0.99);
+}
+.leaderboard-container .leaderboard-tabs .leaderboard-tab:active {
+  transform: scale(1);
+}
+.leaderboard-container .leaderboard-tabs .leaderboard-tab:nth-child(1) {
+  border: none;
+  border-top-left-radius: 8px;
+  border-right: 1px solid #2e2e2e;
+}
+.leaderboard-container .leaderboard-tabs .leaderboard-tab:last-child {
+  border: none;
+  border-top-right-radius: 8px;
+  border-left: 1px solid #2e2e2e;
+}
+.leaderboard-container .leaderboard-tabs .selected {
+  background-color: #ededed;
+  color: #404040;
 }
 .leaderboard-container table {
   border-collapse: collapse;

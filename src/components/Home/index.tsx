@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import lvl1Icon from '../../img/lvl-1.png';
 import lvl2Icon from '../../img/lvl-2.png';
@@ -18,8 +17,6 @@ const Home: React.FC<Props> = ({
   setCompletedLevels,
   getHighScores,
 }) => {
-  const [getLeaderboardLevel, setLeaderboardLevel] = useState<string>('1');
-
   return (
     <section>
       <h2>Choose a level to play</h2>
@@ -48,37 +45,7 @@ const Home: React.FC<Props> = ({
           </div>
         )}
       </div>
-      <h2>Check the high scores</h2>
-      <div className='leaderboard-tabs'>
-        <div
-          className={`leaderboard-tab ${
-            getLeaderboardLevel === '1' && 'selected'
-          }`}
-          onClick={() => setLeaderboardLevel('1')}
-        >
-          Level 1
-        </div>
-        <div
-          className={`leaderboard-tab ${
-            getLeaderboardLevel === '2' && 'selected'
-          }`}
-          onClick={() => setLeaderboardLevel('2')}
-        >
-          Level 2
-        </div>
-        <div
-          className={`leaderboard-tab ${
-            getLeaderboardLevel === '3' && 'selected'
-          }`}
-          onClick={() => setLeaderboardLevel('3')}
-        >
-          Level 3
-        </div>
-      </div>
-      <Leaderboard
-        getLeaderboardLevel={getLeaderboardLevel}
-        getHighScores={getHighScores}
-      />
+      <Leaderboard getHighScores={getHighScores} />
     </section>
   );
 };
