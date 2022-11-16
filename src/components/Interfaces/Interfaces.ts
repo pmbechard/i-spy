@@ -5,10 +5,13 @@ export interface ItemsObject {
   }[];
 }
 
-export interface ScoresObject {
-  highScores: {
-    position: string;
-    username: string;
-    time: number;
-  }[];
+export interface ScoreObject {
+  position: string;
+  username: string;
+  time: number;
+}
+
+export interface ScoreCollection {
+  level: string;
+  scores: ScoreObject[];
 }

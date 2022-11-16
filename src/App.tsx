@@ -21,15 +21,20 @@ import {
 import Loading from './components/Loading';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from './firebase/firebase-config';
-import { ScoresObject } from './components/Interfaces/Interfaces';
+import { ScoreCollection, ScoreObject } from './components/Interfaces/Interfaces';
 
 function App() {
   const [getUserInfo, setUserInfo] = useState<User | null>(null);
   const [getCompletedLevels, setCompletedLevels] = useState<string[]>(['1']);
   const [, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [getHighScores, setHighScores] =
-    useState<{ level: string; scores: ScoresObject }[]>();
+  const [getHighScores, setHighScores] = useState<
+    | {
+        level: string;
+        scores: ScoreObject[];
+      }[]
+    | undefined
+  >();
 
   useEffect(() => {
     setIsLoading(true);
@@ -81,14 +86,14 @@ function App() {
     // "TypeError: Cannot read properties of undefined (reading 'map')
     // at Leaderboard?
     try {
-      const highScores: { level: string; scores: ScoresObject }[] = [];
+      const highScores: ScoreCollection[] | undefined = [];
       for (let i = 1; i <= 3; i++) {
         const docRef = doc(db, 'levels', `${i}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           highScores.push({
             level: `${i}`,
-            scores: docSnap.data().highScores as ScoresObject,
+            scores: docSnap.data().highScores,
           });
         }
       }

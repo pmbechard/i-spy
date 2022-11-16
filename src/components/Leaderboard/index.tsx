@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import first from '../../img/gold.png';
-import second from '../../img/silver.png';
-import third from '../../img/bronze.png';
-import { ScoresObject } from '../Interfaces/Interfaces';
+import goldIcon from '../../img/gold.png';
+import silverIcon from '../../img/silver.png';
+import bronzeIcon from '../../img/bronze.png';
 import Loading from '../Loading';
+import { ScoreCollection, ScoreObject } from '../Interfaces/Interfaces';
 
 interface Props {
   getLeaderboardLevel: string;
-  getHighScores:
-    | {
-        level: string;
-        scores: ScoresObject;
-      }[]
-    | undefined;
+  getHighScores: ScoreCollection[] | undefined;
 }
 
 const Leaderboard: React.FC<Props> = ({
   getLeaderboardLevel,
   getHighScores,
 }) => {
-  const [currentScores, setCurrentScores] = useState<ScoresObject>();
+  const [currentScores, setCurrentScores] = useState<
+    ScoreObject[] | undefined
+  >();
 
   useEffect(() => {
     setCurrentScores(
@@ -28,39 +25,47 @@ const Leaderboard: React.FC<Props> = ({
     );
   }, [getHighScores, getLeaderboardLevel]);
 
-  console.table();
+  const getIcon = (position: string) => {
+    if (position === 'first') return goldIcon;
+    if (position === 'second') return silverIcon;
+    if (position === 'third') return bronzeIcon;
+    return '';
+  };
+
   return (
     <div className='leaderboard-container'>
-      <table>
-        <thead>
-          <tr>
-            <th>Ranking</th>
-            <th>Name</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentScores &&
-            currentScores?.highScores.map((score) => {
+
+          {currentScores ? (
+                  <table>
+                  <thead>
+                    <tr>
+                      <th>Ranking</th>
+                      <th>Name</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+            {currentScores?.map((score) => {
               return (
-                <tr>
+                <tr key={`${getLeaderboardLevel}-${score.position}`}>
                   <td>
-                    <img src={score.position} alt='' />
+                    <img
+                      src={getIcon(score.position)}
+                      alt=''
+                      className='leaderboard-medal'
+                    />
                   </td>
                   <td>{score.username}</td>
                   <td>{score.time}</td>
                 </tr>
               );
             })}
-          {/* <tr>
-              <td>
-                <img src={score.position} alt='' />
-              </td>
-              <td>{score.username}</td>
-              <td>{score.time}</td>
-            </tr> */}
-        </tbody>
-      </table>
+            </tbody>
+            </table>
+          ) : (
+            <Loading />
+          )}
+
     </div>
   );
 };
