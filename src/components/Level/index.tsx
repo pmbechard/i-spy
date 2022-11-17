@@ -20,8 +20,10 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [getClickPos, setClickPos] = useState<number[]>([]);
   const [clickMenuIsHidden, setClickMenuIsHidden] = useState<boolean>(true);
+  const [getRemainingItems, setRemainingItems] = useState<ItemsObject>();
 
   useEffect(() => {
+    // FIXME: Implement countdown to start feature
     setTimeout(() => {
       setIsStarted(true);
     }, 3000);
@@ -45,6 +47,7 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
         if (docSnap.exists()) {
           const itemsObj: ItemsObject = docSnap.data() as ItemsObject;
           setItems(itemsObj);
+          setRemainingItems(itemsObj);
         }
       } catch (e) {
         // FIXME: Loading error
@@ -73,6 +76,25 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
     setClickMenuIsHidden(false);
   };
 
+  const checkItemSelection = (itemName: string): boolean => {
+    let selectedItem = getItems?.items.filter((item) => item.name === itemName);
+    if (selectedItem && selectedItem?.length > 0) {
+      if (
+        Math.abs(getClickPos[0] - selectedItem[0].location[0]) <= 3 &&
+        Math.abs(getClickPos[1] - selectedItem[0].location[1]) <= 3
+      ) {
+        console.log(getClickPos[0], selectedItem[0].location[0]);
+        const remainingItems: ItemsObject = { items: [] };
+        getRemainingItems?.items.forEach((item) => {
+          if (item.name !== itemName) remainingItems.items.push(item);
+        });
+        setRemainingItems(remainingItems);
+        return true;
+      }
+    }
+    return false;
+  };
+
   return (
     <>
       <div className='level-container'>
@@ -98,7 +120,13 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
           ) : (
             <div className='game-img-container'>
               <img src={getImg} alt='' className='level-img' />
-              {!clickMenuIsHidden && <ClickMenu coords={getClickPos} getItems={getItems} />}
+              {!clickMenuIsHidden && (
+                <ClickMenu
+                  coords={getClickPos}
+                  getRemainingItems={getRemainingItems}
+                  checkItemSelection={checkItemSelection}
+                />
+              )}
             </div>
           )}
         </div>

@@ -3,10 +3,15 @@ import { ItemsObject } from '../Interfaces/Interfaces';
 
 interface Props {
   coords: number[];
-  getItems: ItemsObject | undefined;
+  getRemainingItems: ItemsObject | undefined;
+  checkItemSelection: (itemName: string) => boolean;
 }
 
-const ClickMenu: React.FC<Props> = ({ coords, getItems }) => {
+const ClickMenu: React.FC<Props> = ({
+  coords,
+  getRemainingItems,
+  checkItemSelection,
+}) => {
   let selectionMenuStyle: React.CSSProperties = {
     position: 'absolute',
     border: '5px solid #2e2e2e',
@@ -22,11 +27,12 @@ const ClickMenu: React.FC<Props> = ({ coords, getItems }) => {
   return (
     <div className='selection-menu' style={selectionMenuStyle}>
       <div className='selection-menu-dropdown'>
-        {getItems?.items.map((item) => {
+        {getRemainingItems?.items.map((item) => {
           return (
             <div
               className='selection-dropdown-item'
               key={`selection-${item.name}`}
+              onClick={() => checkItemSelection(item.name)}
             >
               {item.name}
             </div>
