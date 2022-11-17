@@ -98,7 +98,7 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
           ) : (
             <div className='game-img-container'>
               <img src={getImg} alt='' className='level-img' />
-              {!clickMenuIsHidden && <ClickMenu coords={getClickPos} />}
+              {!clickMenuIsHidden && <ClickMenu coords={getClickPos} getItems={getItems} />}
             </div>
           )}
         </div>

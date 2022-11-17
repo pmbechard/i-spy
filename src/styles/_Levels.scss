@@ -40,3 +40,21 @@
     }
   }
 }
+
+.selection-menu {
+  .selection-menu-dropdown {
+    position: relative;
+    top: 75px;
+    right: 15px;
+    border: 2px solid $darkest;
+    width: 100px;
+
+    .selection-dropdown-item {
+      text-align: center;
+      padding: 10px 0;
+      background-color: rgba(46, 46, 46, 0.9);
+      color: $lightest;
+      @include hoverActive();
+    }
+  }
+}
