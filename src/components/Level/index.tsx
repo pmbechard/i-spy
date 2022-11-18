@@ -13,6 +13,13 @@ interface Props {
   setCompletedLevels: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
+const itemLabelStyle: React.CSSProperties = {
+  fontWeight: '900',
+  color: '#ededed',
+  padding: '10px 20px',
+  borderRadius: '8px',
+};
+
 const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
   const [getImg, setImg] = useState<string>('');
   const [getItems, setItems] = useState<ItemsObject>();
@@ -58,6 +65,13 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
     fetchItemObjects();
   }, [level]);
 
+  useEffect(() => {
+    if (getRemainingItems && getRemainingItems.items.length === 0) {
+      setIsStarted(false);
+      completeLevel();
+    }
+  }, [getRemainingItems]);
+
   const handleBoardClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => {
@@ -95,6 +109,10 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
     return false;
   };
 
+  const completeLevel = () => {
+    console.log('You got it!');
+  };
+
   return (
     <>
       <div className='level-container'>
@@ -106,7 +124,18 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
               {getItems &&
                 getItems?.items.map((item) => {
                   return (
-                    <div className='search-item' key={item.name}>
+                    <div
+                      className='search-item'
+                      key={item.name}
+                      style={{
+                        ...itemLabelStyle,
+                        backgroundColor: `${
+                          getRemainingItems?.items.includes(item)
+                            ? 'rgb(133, 52, 52)'
+                            : 'green'
+                        }`,
+                      }}
+                    >
                       {item.name}
                     </div>
                   );
@@ -123,6 +152,7 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
               {!clickMenuIsHidden && (
                 <ClickMenu
                   coords={getClickPos}
+                  getItems={getItems}
                   getRemainingItems={getRemainingItems}
                   checkItemSelection={checkItemSelection}
                 />
@@ -131,7 +161,7 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
           )}
         </div>
       </div>
-      {isStarted && <Timer />}
+      {isStarted && <Timer isStarted={isStarted}/>}
     </>
   );
 };

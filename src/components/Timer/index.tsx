@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-const Timer = () => {
+interface Props {
+  isStarted: boolean;
+}
+
+const Timer: React.FC<Props> = ({ isStarted }) => {
   const [getTime, setTime] = useState<number>(0);
 
   useEffect(() => {
@@ -11,7 +15,7 @@ const Timer = () => {
     return () => {
       clearInterval(timerInterval);
     };
-  });
+  }, [getTime, isStarted]);
 
   return (
     <div className='timer-container'>
