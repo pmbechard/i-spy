@@ -28,13 +28,14 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
   const [getClickPos, setClickPos] = useState<number[]>([]);
   const [clickMenuIsHidden, setClickMenuIsHidden] = useState<boolean>(true);
   const [getRemainingItems, setRemainingItems] = useState<ItemsObject>();
+  const [getTime, setTime] = useState<number>(0);
 
   useEffect(() => {
     // FIXME: Implement countdown to start feature
     setTimeout(() => {
       setIsStarted(true);
     }, 3000);
-  });
+  }, []);
 
   useEffect(() => {
     const fetchImg = async () => {
@@ -97,7 +98,6 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
         Math.abs(getClickPos[0] - selectedItem[0].location[0]) <= 3 &&
         Math.abs(getClickPos[1] - selectedItem[0].location[1]) <= 3
       ) {
-        console.log(getClickPos[0], selectedItem[0].location[0]);
         const remainingItems: ItemsObject = { items: [] };
         getRemainingItems?.items.forEach((item) => {
           if (item.name !== itemName) remainingItems.items.push(item);
@@ -111,6 +111,10 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
 
   const completeLevel = () => {
     console.log('You got it!');
+    // check time for high score - modify/fetch new high scores if necessary
+    // add to completed levels in db and setCompletedLevels
+    // open success message (ask about saving if high score)
+    // return to home screen
   };
 
   return (
@@ -161,7 +165,9 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
           )}
         </div>
       </div>
-      {isStarted && <Timer isStarted={isStarted}/>}
+      {isStarted && (
+        <Timer isStarted={isStarted} getTime={getTime} setTime={setTime} />
+      )}
     </>
   );
 };

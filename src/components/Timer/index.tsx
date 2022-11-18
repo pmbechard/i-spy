@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 interface Props {
   isStarted: boolean;
+  getTime: number;
+  setTime: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Timer: React.FC<Props> = ({ isStarted }) => {
-  const [getTime, setTime] = useState<number>(0);
-
+const Timer: React.FC<Props> = ({ isStarted, getTime, setTime }) => {
   useEffect(() => {
     const timerInterval = setInterval(() => {
       setTime(getTime + 1);
@@ -15,7 +15,7 @@ const Timer: React.FC<Props> = ({ isStarted }) => {
     return () => {
       clearInterval(timerInterval);
     };
-  }, [getTime, isStarted]);
+  }, [getTime, isStarted, setTime]);
 
   return (
     <div className='timer-container'>
