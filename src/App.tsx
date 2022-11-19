@@ -55,6 +55,7 @@ function App() {
 
   useEffect(() => {
     fetchUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getUserInfo]);
 
   const signIn = async () => {
@@ -136,6 +137,14 @@ function App() {
     }
   };
 
+  const handleCompletedLevel = async (level: string) => {
+    console.log(`Level ${level} complete!`);
+    if (!getCompletedLevels.includes(level))
+      setCompletedLevels(getCompletedLevels.concat(level));
+    // check for high score - ask for permission to save
+    // show success msg
+  };
+
   return (
     <BrowserRouter>
       <Header
@@ -152,19 +161,28 @@ function App() {
               <Route
                 path='/1'
                 element={
-                  <Level level={'1'} setCompletedLevels={setCompletedLevels} />
+                  <Level
+                    level={'1'}
+                    handleCompletedLevel={handleCompletedLevel}
+                  />
                 }
               />
               <Route
                 path='/2'
                 element={
-                  <Level level={'2'} setCompletedLevels={setCompletedLevels} />
+                  <Level
+                    level={'2'}
+                    handleCompletedLevel={handleCompletedLevel}
+                  />
                 }
               />
               <Route
                 path='/3'
                 element={
-                  <Level level={'3'} setCompletedLevels={setCompletedLevels} />
+                  <Level
+                    level={'3'}
+                    handleCompletedLevel={handleCompletedLevel}
+                  />
                 }
               />
               <Route
@@ -172,7 +190,6 @@ function App() {
                 element={
                   <Home
                     getCompletedLevels={getCompletedLevels}
-                    setCompletedLevels={setCompletedLevels}
                     getHighScores={getHighScores}
                   />
                 }

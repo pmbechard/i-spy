@@ -7,10 +7,11 @@ import { doc, getDoc } from 'firebase/firestore';
 import Timer from '../Timer';
 import { ItemsObject } from '../Interfaces/Interfaces';
 import ClickMenu from './ClickMenu';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   level: string;
-  setCompletedLevels: React.Dispatch<React.SetStateAction<string[]>>;
+  handleCompletedLevel: (level: string) => Promise<void>;
 }
 
 const itemLabelStyle: React.CSSProperties = {
@@ -20,7 +21,7 @@ const itemLabelStyle: React.CSSProperties = {
   borderRadius: '8px',
 };
 
-const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
+const Level: React.FC<Props> = ({ level, handleCompletedLevel }) => {
   const [getImg, setImg] = useState<string>('');
   const [getItems, setItems] = useState<ItemsObject>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -29,6 +30,9 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
   const [clickMenuIsHidden, setClickMenuIsHidden] = useState<boolean>(true);
   const [getRemainingItems, setRemainingItems] = useState<ItemsObject>();
   const [getTime, setTime] = useState<number>(0);
+  const currentLevel: string = useLocation().pathname.charAt(
+    useLocation().pathname.length - 1
+  );
 
   useEffect(() => {
     // FIXME: Implement countdown to start feature
@@ -69,9 +73,9 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
   useEffect(() => {
     if (getRemainingItems && getRemainingItems.items.length === 0) {
       setIsStarted(false);
-      completeLevel();
+      handleCompletedLevel(currentLevel);
     }
-  }, [getRemainingItems]);
+  }, [currentLevel, getRemainingItems, handleCompletedLevel]);
 
   const handleBoardClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -107,14 +111,6 @@ const Level: React.FC<Props> = ({ level, setCompletedLevels }) => {
       }
     }
     return false;
-  };
-
-  const completeLevel = () => {
-    console.log('You got it!');
-    // check time for high score - modify/fetch new high scores if necessary
-    // add to completed levels in db and setCompletedLevels
-    // open success message (ask about saving if high score)
-    // return to home screen
   };
 
   return (

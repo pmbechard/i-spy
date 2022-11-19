@@ -8,13 +8,11 @@ import { ScoreCollection } from '../Interfaces/Interfaces';
 
 interface Props {
   getCompletedLevels: string[];
-  setCompletedLevels: React.Dispatch<React.SetStateAction<string[]>>;
   getHighScores: ScoreCollection[] | undefined;
 }
 
 const Home: React.FC<Props> = ({
   getCompletedLevels,
-  setCompletedLevels,
   getHighScores,
 }) => {
   return (
