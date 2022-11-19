@@ -19,13 +19,16 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import Loading from './components/Loading';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from './firebase/firebase-config';
-import { ScoreCollection, ScoreObject } from './components/Interfaces/Interfaces';
+import {
+  ScoreCollection,
+  ScoreObject,
+} from './components/Interfaces/Interfaces';
 
 function App() {
   const [getUserInfo, setUserInfo] = useState<User | null>(null);
-  const [getCompletedLevels, setCompletedLevels] = useState<string[]>(['1']);
+  const [getCompletedLevels, setCompletedLevels] = useState<string[]>([]);
   const [, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [getHighScores, setHighScores] = useState<
@@ -49,6 +52,10 @@ function App() {
       listener();
     };
   }, []);
+
+  useEffect(() => {
+    fetchUserData();
+  }, [getUserInfo]);
 
   const signIn = async () => {
     const auth = getAuth();
@@ -80,11 +87,36 @@ function App() {
       });
   };
 
+  const fetchUserData = async () => {
+    if (!getUserInfo?.email) return;
+    let levels: string[] = [];
+    try {
+      const docRef = doc(db, 'users', getUserInfo.email);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        levels = docSnap.data().completedLevels;
+      } else {
+        await createUserDoc();
+      }
+    } catch (e) {
+      // FIXME: Loading error
+      console.log(e);
+    }
+    setCompletedLevels(levels);
+  };
+
+  const createUserDoc = async () => {
+    try {
+      await setDoc(doc(db, 'users', getUserInfo?.email || ''), {
+        completedLevels: [],
+      });
+    } catch (e) {
+      //FIXME: Loading error
+      console.log(e);
+    }
+  };
+
   const fetchHighScores = async () => {
-    // FIXME: this is foobar'd somewhere along the way...
-    // probably among the interfaces -- keeps getting a
-    // "TypeError: Cannot read properties of undefined (reading 'map')
-    // at Leaderboard?
     try {
       const highScores: ScoreCollection[] | undefined = [];
       for (let i = 1; i <= 3; i++) {
