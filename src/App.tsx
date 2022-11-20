@@ -26,10 +26,10 @@ import {
   ScoreObject,
 } from './components/Interfaces/Interfaces';
 import ErrorMsg from './components/ErrorMsg';
+import Countdown from './components/Countdown';
 
 // TODO:
 // Show success message on level completion with option to save if ranked in highScores
-// Show error messages when db cannot connect
 // Implement Countdown component to begin Levels
 // Improve styling
 
@@ -46,6 +46,7 @@ function App() {
     | undefined
   >();
   const [showErrorMsg, setShowErrorMsg] = useState<boolean>(false);
+  const [showCountdown, setShowCountdown] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -248,6 +249,8 @@ function App() {
                   <Level
                     level={'1'}
                     handleCompletedLevel={handleCompletedLevel}
+                    showCountdown={showCountdown}
+                    setShowCountdown={setShowCountdown}
                   />
                 }
               />
@@ -257,6 +260,8 @@ function App() {
                   <Level
                     level={'2'}
                     handleCompletedLevel={handleCompletedLevel}
+                    showCountdown={showCountdown}
+                    setShowCountdown={setShowCountdown}
                   />
                 }
               />
@@ -266,6 +271,8 @@ function App() {
                   <Level
                     level={'3'}
                     handleCompletedLevel={handleCompletedLevel}
+                    showCountdown={showCountdown}
+                    setShowCountdown={setShowCountdown}
                   />
                 }
               />
@@ -293,6 +300,7 @@ function App() {
       )}
       <Footer />
       <ErrorMsg showErrorMsg={showErrorMsg} setShowErrorMsg={setShowErrorMsg} />
+      {showCountdown && <Countdown setShowCountdown={setShowCountdown} />}
     </BrowserRouter>
   );
 }

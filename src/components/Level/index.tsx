@@ -12,6 +12,8 @@ import { useLocation } from 'react-router-dom';
 interface Props {
   level: string;
   handleCompletedLevel: (level: string, time: number) => Promise<void>;
+  showCountdown: boolean;
+  setShowCountdown: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const itemLabelStyle: React.CSSProperties = {
@@ -21,7 +23,12 @@ const itemLabelStyle: React.CSSProperties = {
   borderRadius: '8px',
 };
 
-const Level: React.FC<Props> = ({ level, handleCompletedLevel }) => {
+const Level: React.FC<Props> = ({
+  level,
+  handleCompletedLevel,
+  showCountdown,
+  setShowCountdown,
+}) => {
   const [getImg, setImg] = useState<string>('');
   const [getItems, setItems] = useState<ItemsObject>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -35,11 +42,12 @@ const Level: React.FC<Props> = ({ level, handleCompletedLevel }) => {
   );
 
   useEffect(() => {
-    // FIXME: Implement countdown to start feature
-    setTimeout(() => {
-      setIsStarted(true);
-    }, 3000);
+    setShowCountdown(true);
   }, []);
+
+  useEffect(() => {
+    if (!showCountdown) setIsStarted(true);
+  }, [showCountdown]);
 
   useEffect(() => {
     const fetchImg = async () => {
