@@ -16,10 +16,12 @@ const Leaderboard: React.FC<Props> = ({ getHighScores }) => {
   >();
 
   useEffect(() => {
-    setCurrentScores(
-      getHighScores?.filter((scores) => scores.level === getLeaderboardLevel)[0]
-        .scores
-    );
+    const highScores = getHighScores
+      ?.filter((scores) => scores.level === getLeaderboardLevel)[0]
+      .scores.sort((a, b) => {
+        return a.position.localeCompare(b.position);
+      });
+    setCurrentScores(highScores);
   }, [getHighScores, getLeaderboardLevel]);
 
   const getIcon = (position: string) => {
@@ -70,6 +72,7 @@ const Leaderboard: React.FC<Props> = ({ getHighScores }) => {
             </thead>
             <tbody>
               {currentScores?.map((score) => {
+                // FIXME: not displaying properly when provided list is out of order
                 return (
                   <tr key={`${getLeaderboardLevel}-${score.position}`}>
                     <td>

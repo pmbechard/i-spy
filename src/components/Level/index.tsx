@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 
 interface Props {
   level: string;
-  handleCompletedLevel: (level: string) => Promise<void>;
+  handleCompletedLevel: (level: string, time: number) => Promise<void>;
 }
 
 const itemLabelStyle: React.CSSProperties = {
@@ -73,9 +73,10 @@ const Level: React.FC<Props> = ({ level, handleCompletedLevel }) => {
   useEffect(() => {
     if (getRemainingItems && getRemainingItems.items.length === 0) {
       setIsStarted(false);
-      handleCompletedLevel(currentLevel);
+      handleCompletedLevel(currentLevel, getTime);
     }
-  }, [currentLevel, getRemainingItems, handleCompletedLevel]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getRemainingItems]);
 
   const handleBoardClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

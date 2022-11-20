@@ -19,7 +19,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import Loading from './components/Loading';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from './firebase/firebase-config';
 import {
   ScoreCollection,
@@ -137,12 +137,93 @@ function App() {
     }
   };
 
-  const handleCompletedLevel = async (level: string) => {
-    console.log(`Level ${level} complete!`);
-    if (!getCompletedLevels.includes(level))
+  const handleCompletedLevel = async (level: string, time: number) => {
+    // TODO: show success msg
+    await updatedCompletedLevels(level);
+    await updateHighScores(level, time);
+  };
+
+  const updatedCompletedLevels = async (level: string) => {
+    if (!getUserInfo?.email) return;
+    if (!getCompletedLevels.includes(level)) {
+      const docRef = doc(db, 'users', getUserInfo.email);
+      try {
+        await updateDoc(docRef, {
+          completedLevels: getCompletedLevels.concat(level),
+        });
+      } catch (e) {
+        // FIXME: Loading error
+        console.log(e);
+      }
       setCompletedLevels(getCompletedLevels.concat(level));
-    // check for high score - ask for permission to save
-    // show success msg
+    }
+  };
+
+  const updateHighScores = async (level: string, time: number) => {
+    const highScores: ScoreObject[] | undefined = getHighScores?.filter(
+      (scores) => scores.level === level
+    )[0].scores;
+
+    if (!highScores || highScores.length < 3) return;
+
+    for (let i = 2; i >= 0; i--) {
+      if (time < highScores[i].time) {
+        const docRef = doc(db, 'levels', level);
+        try {
+          let position: string = '';
+          if (i === 2) position = 'first';
+          else if (i === 1) position = 'second';
+          else position = 'third';
+          let username: string = getUserInfo?.displayName || 'Anonymous';
+          const spaceIndex = username.indexOf(' ');
+          if (spaceIndex > 0) username = username.slice(0, spaceIndex + 2);
+          const updatedHighScores: ScoreObject[] = [
+            { position: position, time: time, username: username },
+          ];
+          if (position === 'first') {
+            highScores.forEach((score) => {
+              if (score.position === 'first') {
+                updatedHighScores.push({
+                  position: 'second',
+                  time: score.time,
+                  username: score.username,
+                });
+              } else if (score.position === 'second') {
+                updatedHighScores.push({
+                  position: 'third',
+                  time: score.time,
+                  username: score.username,
+                });
+              }
+            });
+          } else if (position === 'second') {
+            highScores.forEach((score) => {
+              if (score.position === 'first') updatedHighScores.push(score);
+              else if (score.position === 'second') {
+                updatedHighScores.push({
+                  position: 'third',
+                  time: score.time,
+                  username: score.username,
+                });
+              }
+            });
+          } else if (position === 'third') {
+            highScores.forEach((score) => {
+              if (score.position === 'first') updatedHighScores.push(score);
+              else if (score.position === 'second')
+                updatedHighScores.push(score);
+            });
+          }
+          await updateDoc(docRef, {
+            highScores: updatedHighScores,
+          });
+          await fetchHighScores();
+        } catch (e) {
+          // FIXME: Loading error
+          console.log(e);
+        }
+      }
+    }
   };
 
   return (
