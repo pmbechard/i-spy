@@ -387,8 +387,13 @@ footer img:active {
   width: 40vw;
   border-radius: 12px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
 }
-.error-msg-container .error-msg-card img {
+.error-msg-container .error-msg-card .close-icon {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -399,13 +404,13 @@ footer img:active {
   transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
   cursor: pointer;
 }
-.error-msg-container .error-msg-card img:hover {
+.error-msg-container .error-msg-card .close-icon:hover {
   opacity: 1;
 }
-.error-msg-container .error-msg-card img:active {
+.error-msg-container .error-msg-card .close-icon:active {
   transform: scale(0.99);
 }
-.error-msg-container .error-msg-card h2 {
+.error-msg-container .error-msg-card .error-msg h2 {
   margin-bottom: 10px;
 }
 

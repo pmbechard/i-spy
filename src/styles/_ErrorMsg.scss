@@ -16,8 +16,10 @@
     width: 40vw;
     border-radius: 12px;
     position: relative;
+    @include fCentre();
+    gap: 30px;
 
-    img {
+    .close-icon {
       position: absolute;
       top: 5px;
       right: 5px;
@@ -27,8 +29,10 @@
       @include hoverActive();
     }
 
-    h2 {
-      margin-bottom: 10px;
+    .error-msg {
+      h2 {
+        margin-bottom: 10px;
+      }
     }
   }
 }
