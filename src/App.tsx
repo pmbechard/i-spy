@@ -25,6 +25,13 @@ import {
   ScoreCollection,
   ScoreObject,
 } from './components/Interfaces/Interfaces';
+import ErrorMsg from './components/ErrorMsg';
+
+// TODO:
+// Show success message on level completion with option to save if ranked in highScores
+// Show error messages when db cannot connect
+// Implement Countdown component to begin Levels
+// Improve styling
 
 function App() {
   const [getUserInfo, setUserInfo] = useState<User | null>(null);
@@ -38,6 +45,7 @@ function App() {
       }[]
     | undefined
   >();
+  const [showErrorMsg, setShowErrorMsg] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -100,8 +108,7 @@ function App() {
         await createUserDoc();
       }
     } catch (e) {
-      // FIXME: Loading error
-      console.log(e);
+      setShowErrorMsg(true);
     }
     setCompletedLevels(levels);
   };
@@ -112,8 +119,7 @@ function App() {
         completedLevels: [],
       });
     } catch (e) {
-      //FIXME: Loading error
-      console.log(e);
+      setShowErrorMsg(true);
     }
   };
 
@@ -132,8 +138,7 @@ function App() {
       }
       setHighScores(highScores);
     } catch (e) {
-      // FIXME: Loading error
-      console.log(e);
+      setShowErrorMsg(true);
     }
   };
 
@@ -152,8 +157,7 @@ function App() {
           completedLevels: getCompletedLevels.concat(level),
         });
       } catch (e) {
-        // FIXME: Loading error
-        console.log(e);
+        setShowErrorMsg(true);
       }
       setCompletedLevels(getCompletedLevels.concat(level));
     }
@@ -219,8 +223,7 @@ function App() {
           });
           await fetchHighScores();
         } catch (e) {
-          // FIXME: Loading error
-          console.log(e);
+          setShowErrorMsg(true);
         }
       }
     }
@@ -289,6 +292,7 @@ function App() {
         </Routes>
       )}
       <Footer />
+      <ErrorMsg showErrorMsg={showErrorMsg} setShowErrorMsg={setShowErrorMsg} />
     </BrowserRouter>
   );
 }

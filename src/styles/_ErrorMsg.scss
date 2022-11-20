@@ -1,0 +1,34 @@
+.error-msg-container {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  @include fCentre();
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  .error-msg-card {
+    border: 3px solid $darkest;
+    background-color: $light;
+    color: $dark;
+    padding: 30px;
+    box-shadow: 1px 1px 3px $darkest;
+    width: 40vw;
+    border-radius: 12px;
+    position: relative;
+
+    img {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      height: 30px;
+      width: auto;
+      cursor: pointer;
+      @include hoverActive();
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+  }
+}

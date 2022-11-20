@@ -72,7 +72,6 @@ const Leaderboard: React.FC<Props> = ({ getHighScores }) => {
             </thead>
             <tbody>
               {currentScores?.map((score) => {
-                // FIXME: not displaying properly when provided list is out of order
                 return (
                   <tr key={`${getLeaderboardLevel}-${score.position}`}>
                     <td>
@@ -83,7 +82,7 @@ const Leaderboard: React.FC<Props> = ({ getHighScores }) => {
                       />
                     </td>
                     <td>{score.username}</td>
-                    <td>{score.time}</td>
+                    <td>{score.time}s</td>
                   </tr>
                 );
               })}

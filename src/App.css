@@ -366,6 +366,49 @@ footer img:active {
   flex-direction: row;
 }
 
+.error-msg-container {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.error-msg-container .error-msg-card {
+  border: 3px solid #2e2e2e;
+  background-color: #b9b9b9;
+  color: #404040;
+  padding: 30px;
+  box-shadow: 1px 1px 3px #2e2e2e;
+  width: 40vw;
+  border-radius: 12px;
+  position: relative;
+}
+.error-msg-container .error-msg-card img {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 30px;
+  width: auto;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
+  cursor: pointer;
+}
+.error-msg-container .error-msg-card img:hover {
+  opacity: 1;
+}
+.error-msg-container .error-msg-card img:active {
+  transform: scale(0.99);
+}
+.error-msg-container .error-msg-card h2 {
+  margin-bottom: 10px;
+}
+
 * {
   margin: 0;
   padding: 0;
