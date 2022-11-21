@@ -29,8 +29,12 @@ import ErrorMsg from './components/ErrorMsg';
 import Countdown from './components/Countdown';
 
 // TODO:
-// Show success message on level completion with option to save if ranked in highScores
+// Add option to save if ranked in highScores
 // Improve styling
+
+// FIXME:
+// bug in high score rankings
+//    - use .sort() to sort each load instead of store "position" in db
 
 function App() {
   const [getUserInfo, setUserInfo] = useState<User | null>(null);

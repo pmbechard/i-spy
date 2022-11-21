@@ -8,6 +8,7 @@ import Timer from '../Timer';
 import { ItemsObject } from '../Interfaces/Interfaces';
 import ClickMenu from './ClickMenu';
 import { useLocation } from 'react-router-dom';
+import SuccessMsg from '../SuccessMsg';
 
 interface Props {
   level: string;
@@ -44,6 +45,7 @@ const Level: React.FC<Props> = ({
   const currentLevel: string = useLocation().pathname.charAt(
     useLocation().pathname.length - 1
   );
+  const [showSuccessMsg, setShowSuccessMsg] = useState<boolean>(false);
 
   useEffect(() => {
     setShowCountdown(true);
@@ -90,6 +92,7 @@ const Level: React.FC<Props> = ({
     if (getRemainingItems && getRemainingItems.items.length === 0) {
       setIsStarted(false);
       handleCompletedLevel(currentLevel, getTime);
+      setShowSuccessMsg(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getRemainingItems]);
@@ -181,6 +184,7 @@ const Level: React.FC<Props> = ({
       {isStarted && !showCountdown && (
         <Timer isStarted={isStarted} getTime={getTime} setTime={setTime} />
       )}
+      {showSuccessMsg && <SuccessMsg showSuccessMsg={showSuccessMsg} setShowSuccessMsg={setShowSuccessMsg} />}
     </>
   );
 };
