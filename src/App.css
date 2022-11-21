@@ -426,7 +426,30 @@ footer img:active {
   top: 0;
   left: 0;
 }
+.countdown-container .countdown-card {
+  color: #b9b9b9;
+  font-size: 72px;
+  -webkit-animation: shrink 1s linear 6 both;
+          animation: shrink 1s linear 6 both;
+}
 
+@-webkit-keyframes shrink {
+  0% {
+    font-size: 144px;
+  }
+  100% {
+    font-size: 12px;
+  }
+}
+
+@keyframes shrink {
+  0% {
+    font-size: 144px;
+  }
+  100% {
+    font-size: 12px;
+  }
+}
 * {
   margin: 0;
   padding: 0;

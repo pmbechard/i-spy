@@ -23,7 +23,10 @@ const ErrorMsg: React.FC<Props> = ({ showErrorMsg, setShowErrorMsg }) => {
         <img
           src={closeIcon}
           alt='close'
-          onClick={() => setShowErrorMsg(false)}
+          onClick={() => {
+            setShowErrorMsg(false);
+            navigate('/');
+          }}
           className='close-icon'
         />
         <div className='error-img'>

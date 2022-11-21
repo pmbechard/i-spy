@@ -30,7 +30,6 @@ import Countdown from './components/Countdown';
 
 // TODO:
 // Show success message on level completion with option to save if ranked in highScores
-// Implement Countdown component to begin Levels
 // Improve styling
 
 function App() {

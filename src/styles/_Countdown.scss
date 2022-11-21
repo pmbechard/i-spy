@@ -6,4 +6,19 @@
   position: fixed;
   top: 0;
   left: 0;
+
+  .countdown-card {
+    color: $light;
+    font-size: 72px;
+    animation: shrink 1s linear 6 both;
+  }
+}
+
+@keyframes shrink {
+  0% {
+    font-size: 144px;
+  }
+  100% {
+    font-size: 12px;
+  }
 }
