@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 interface Props {
   setShowCountdown: React.Dispatch<React.SetStateAction<boolean>>;
+  countdownTimer: number;
+  setCountdownTimer: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Countdown: React.FC<Props> = ({ setShowCountdown }) => {
-  const [getTimer, setTimer] = useState<number>(5);
-
+const Countdown: React.FC<Props> = ({
+  setShowCountdown,
+  countdownTimer,
+  setCountdownTimer,
+}) => {
   useEffect(() => {
     setInterval(() => {
-      if (getTimer === 1) setShowCountdown(false);
-      setTimer(getTimer - 1);
+      if (countdownTimer === 0) setShowCountdown(false);
+      setCountdownTimer(countdownTimer - 1);
     }, 1000);
-    return () => {
-      setTimer(5);
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [countdownTimer]);
 
   return (
     <div className='countdown-container'>
-      <div className='countdown-card'>Countdown</div>
+      <div className='countdown-card'>
+        {countdownTimer === 0 ? 'GO!' : countdownTimer}
+      </div>
     </div>
   );
 };

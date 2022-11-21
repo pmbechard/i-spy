@@ -47,6 +47,7 @@ function App() {
   >();
   const [showErrorMsg, setShowErrorMsg] = useState<boolean>(false);
   const [showCountdown, setShowCountdown] = useState<boolean>(false);
+  const [countdownTimer, setCountdownTimer] = useState<number>(5);
 
   useEffect(() => {
     setIsLoading(true);
@@ -251,6 +252,7 @@ function App() {
                     handleCompletedLevel={handleCompletedLevel}
                     showCountdown={showCountdown}
                     setShowCountdown={setShowCountdown}
+                    setShowErrorMsg={setShowErrorMsg}
                   />
                 }
               />
@@ -262,6 +264,7 @@ function App() {
                     handleCompletedLevel={handleCompletedLevel}
                     showCountdown={showCountdown}
                     setShowCountdown={setShowCountdown}
+                    setShowErrorMsg={setShowErrorMsg}
                   />
                 }
               />
@@ -273,6 +276,7 @@ function App() {
                     handleCompletedLevel={handleCompletedLevel}
                     showCountdown={showCountdown}
                     setShowCountdown={setShowCountdown}
+                    setShowErrorMsg={setShowErrorMsg}
                   />
                 }
               />
@@ -300,7 +304,7 @@ function App() {
       )}
       <Footer />
       <ErrorMsg showErrorMsg={showErrorMsg} setShowErrorMsg={setShowErrorMsg} />
-      {showCountdown && <Countdown setShowCountdown={setShowCountdown} />}
+      {showCountdown && <Countdown setShowCountdown={setShowCountdown} countdownTimer={countdownTimer} setCountdownTimer={setCountdownTimer} />}
     </BrowserRouter>
   );
 }

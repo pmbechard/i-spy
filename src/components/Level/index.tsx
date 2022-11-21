@@ -14,6 +14,7 @@ interface Props {
   handleCompletedLevel: (level: string, time: number) => Promise<void>;
   showCountdown: boolean;
   setShowCountdown: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowErrorMsg: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const itemLabelStyle: React.CSSProperties = {
@@ -28,6 +29,7 @@ const Level: React.FC<Props> = ({
   handleCompletedLevel,
   showCountdown,
   setShowCountdown,
+  setShowErrorMsg,
 }) => {
   const [getImg, setImg] = useState<string>('');
   const [getItems, setItems] = useState<ItemsObject>();
@@ -43,6 +45,7 @@ const Level: React.FC<Props> = ({
 
   useEffect(() => {
     setShowCountdown(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -55,8 +58,7 @@ const Level: React.FC<Props> = ({
       try {
         setImg(await getDownloadURL(ref(storage, `level-${level}.jpg`)));
       } catch (e) {
-        // FIXME: Show loading error
-        console.log(e);
+        setShowErrorMsg(true);
       }
       setIsLoading(false);
     };
@@ -70,12 +72,12 @@ const Level: React.FC<Props> = ({
           setRemainingItems(itemsObj);
         }
       } catch (e) {
-        // FIXME: Loading error
-        console.log(e);
+        setShowErrorMsg(true);
       }
     };
     fetchImg();
     fetchItemObjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [level]);
 
   useEffect(() => {
@@ -170,7 +172,7 @@ const Level: React.FC<Props> = ({
           )}
         </div>
       </div>
-      {isStarted && (
+      {isStarted && !showCountdown && (
         <Timer isStarted={isStarted} getTime={getTime} setTime={setTime} />
       )}
     </>
