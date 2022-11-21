@@ -48,6 +48,9 @@ const Level: React.FC<Props> = ({
   useEffect(() => {
     setShowCountdown(true);
     setCountdownTimer(5);
+    return () => {
+      setShowCountdown(false);g
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

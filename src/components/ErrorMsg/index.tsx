@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import closeIcon from '../../img/close.png';
 import errorIcon from '../../img/no-connection.png';
 
@@ -8,8 +9,16 @@ interface Props {
 }
 
 const ErrorMsg: React.FC<Props> = ({ showErrorMsg, setShowErrorMsg }) => {
+  let navigate = useNavigate();
+
   return showErrorMsg ? (
-    <div className='error-msg-container' onClick={() => setShowErrorMsg(false)}>
+    <div
+      className='error-msg-container'
+      onClick={() => {
+        setShowErrorMsg(false);
+        navigate('/');
+      }}
+    >
       <div className='error-msg-card'>
         <img
           src={closeIcon}
