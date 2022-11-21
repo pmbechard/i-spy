@@ -15,6 +15,7 @@ interface Props {
   showCountdown: boolean;
   setShowCountdown: React.Dispatch<React.SetStateAction<boolean>>;
   setShowErrorMsg: React.Dispatch<React.SetStateAction<boolean>>;
+  setCountdownTimer: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const itemLabelStyle: React.CSSProperties = {
@@ -30,6 +31,7 @@ const Level: React.FC<Props> = ({
   showCountdown,
   setShowCountdown,
   setShowErrorMsg,
+  setCountdownTimer,
 }) => {
   const [getImg, setImg] = useState<string>('');
   const [getItems, setItems] = useState<ItemsObject>();
@@ -45,6 +47,7 @@ const Level: React.FC<Props> = ({
 
   useEffect(() => {
     setShowCountdown(true);
+    setCountdownTimer(5);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

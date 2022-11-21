@@ -253,6 +253,7 @@ function App() {
                     showCountdown={showCountdown}
                     setShowCountdown={setShowCountdown}
                     setShowErrorMsg={setShowErrorMsg}
+                    setCountdownTimer={setCountdownTimer}
                   />
                 }
               />
@@ -265,6 +266,7 @@ function App() {
                     showCountdown={showCountdown}
                     setShowCountdown={setShowCountdown}
                     setShowErrorMsg={setShowErrorMsg}
+                    setCountdownTimer={setCountdownTimer}
                   />
                 }
               />
@@ -277,6 +279,7 @@ function App() {
                     showCountdown={showCountdown}
                     setShowCountdown={setShowCountdown}
                     setShowErrorMsg={setShowErrorMsg}
+                    setCountdownTimer={setCountdownTimer}
                   />
                 }
               />
@@ -304,7 +307,13 @@ function App() {
       )}
       <Footer />
       <ErrorMsg showErrorMsg={showErrorMsg} setShowErrorMsg={setShowErrorMsg} />
-      {showCountdown && <Countdown setShowCountdown={setShowCountdown} countdownTimer={countdownTimer} setCountdownTimer={setCountdownTimer} />}
+      {showCountdown && !showErrorMsg && (
+        <Countdown
+          setShowCountdown={setShowCountdown}
+          countdownTimer={countdownTimer}
+          setCountdownTimer={setCountdownTimer}
+        />
+      )}
     </BrowserRouter>
   );
 }

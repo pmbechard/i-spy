@@ -12,10 +12,19 @@ const Countdown: React.FC<Props> = ({
   setCountdownTimer,
 }) => {
   useEffect(() => {
-    setInterval(() => {
+    return () => {
+      setCountdownTimer(5);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
       if (countdownTimer === 0) setShowCountdown(false);
       setCountdownTimer(countdownTimer - 1);
     }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countdownTimer]);
 
