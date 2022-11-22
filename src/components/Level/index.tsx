@@ -5,7 +5,7 @@ import { ref, getDownloadURL } from 'firebase/storage';
 import Loading from '../Loading';
 import { doc, getDoc } from 'firebase/firestore';
 import Timer from '../Timer';
-import { ItemsObject } from '../Interfaces/Interfaces';
+import { ItemsObject, ScoreObject } from '../Interfaces/Interfaces';
 import ClickMenu from './ClickMenu';
 import { useLocation } from 'react-router-dom';
 import SuccessMsg from '../SuccessMsg';
@@ -17,6 +17,12 @@ interface Props {
   setShowCountdown: React.Dispatch<React.SetStateAction<boolean>>;
   setShowErrorMsg: React.Dispatch<React.SetStateAction<boolean>>;
   setCountdownTimer: React.Dispatch<React.SetStateAction<number>>;
+  getHighScores:
+    | {
+        level: string;
+        scores: ScoreObject[];
+      }[]
+    | undefined;
 }
 
 const itemLabelStyle: React.CSSProperties = {
@@ -33,6 +39,7 @@ const Level: React.FC<Props> = ({
   setShowCountdown,
   setShowErrorMsg,
   setCountdownTimer,
+  getHighScores,
 }) => {
   const [getImg, setImg] = useState<string>('');
   const [getItems, setItems] = useState<ItemsObject>();
@@ -90,9 +97,10 @@ const Level: React.FC<Props> = ({
 
   useEffect(() => {
     if (getRemainingItems && getRemainingItems.items.length === 0) {
+      // FIXME: rearrange logic to add optional saving ability
       setIsStarted(false);
-      handleCompletedLevel(currentLevel, getTime);
       setShowSuccessMsg(true);
+      handleCompletedLevel(currentLevel, getTime);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getRemainingItems]);
@@ -184,7 +192,16 @@ const Level: React.FC<Props> = ({
       {isStarted && !showCountdown && (
         <Timer isStarted={isStarted} getTime={getTime} setTime={setTime} />
       )}
-      {showSuccessMsg && <SuccessMsg showSuccessMsg={showSuccessMsg} setShowSuccessMsg={setShowSuccessMsg} />}
+      {showSuccessMsg && (
+        <SuccessMsg
+          showSuccessMsg={showSuccessMsg}
+          setShowSuccessMsg={setShowSuccessMsg}
+          getTime={getTime}
+          highScores={
+            getHighScores?.filter((scores) => scores.level === currentLevel)[0]
+          }
+        />
+      )}
     </>
   );
 };

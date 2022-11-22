@@ -225,6 +225,7 @@ function App() {
                     setShowCountdown={setShowCountdown}
                     setShowErrorMsg={setShowErrorMsg}
                     setCountdownTimer={setCountdownTimer}
+                    getHighScores={getHighScores}
                   />
                 }
               />
@@ -238,6 +239,7 @@ function App() {
                     setShowCountdown={setShowCountdown}
                     setShowErrorMsg={setShowErrorMsg}
                     setCountdownTimer={setCountdownTimer}
+                    getHighScores={getHighScores}
                   />
                 }
               />
@@ -251,6 +253,7 @@ function App() {
                     setShowCountdown={setShowCountdown}
                     setShowErrorMsg={setShowErrorMsg}
                     setCountdownTimer={setCountdownTimer}
+                    getHighScores={getHighScores}
                   />
                 }
               />
