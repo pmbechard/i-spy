@@ -14,6 +14,12 @@ interface Props {
         scores: ScoreObject[];
       }
     | undefined;
+  handleCompletedLevel: (
+    level: string,
+    time: number,
+    save: boolean
+  ) => Promise<void>;
+  currentLevel: string;
 }
 
 const SuccessMsg: React.FC<Props> = ({
@@ -21,9 +27,12 @@ const SuccessMsg: React.FC<Props> = ({
   setShowSuccessMsg,
   getTime,
   highScores,
+  handleCompletedLevel,
+  currentLevel,
 }) => {
   let navigate = useNavigate();
   const [successMsg, setSuccessMsg] = useState<string>('');
+  const [isHighScore, setIsHighScore] = useState<boolean>();
   useEffect(() => {
     let counter = 0;
     highScores?.scores.forEach((score) => {
@@ -31,10 +40,14 @@ const SuccessMsg: React.FC<Props> = ({
     });
     if (counter === 0)
       setSuccessMsg("You didn't make the leaderboard this time. Try again!");
-    if (counter === 1) setSuccessMsg('You placed third on the leaderboard!');
-    if (counter === 2) setSuccessMsg('You placed second on the leaderboard!');
-    if (counter === 3) setSuccessMsg('You placed first on the leaderboard!');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    else if (counter === 1)
+      setSuccessMsg('You placed third on the leaderboard!');
+    else if (counter === 2)
+      setSuccessMsg('You placed second on the leaderboard!');
+    else if (counter === 3)
+      setSuccessMsg('You placed first on the leaderboard!');
+    counter > 0 ? setIsHighScore(true) : setIsHighScore(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return showSuccessMsg ? (
@@ -62,7 +75,37 @@ const SuccessMsg: React.FC<Props> = ({
           <h2>Great Job!</h2>
           <p>
             You completed the level in {getTime} seconds! {successMsg}
+            {isHighScore &&
+              ' Would you like to save your high score to the leaderboard?'}
           </p>
+          {!isHighScore && (
+            <button
+              onClick={() => {
+                setShowSuccessMsg(false);
+                navigate('/');
+              }}
+            >
+              OK
+            </button>
+          )}
+          {isHighScore && (
+            <div className='save-score-options'>
+              <button
+                onClick={() => {
+                  handleCompletedLevel(currentLevel, getTime, true);
+                }}
+              >
+                Add High Score
+              </button>
+              <button
+                onClick={() => {
+                  handleCompletedLevel(currentLevel, getTime, false);
+                }}
+              >
+                Discard High Score
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

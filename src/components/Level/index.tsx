@@ -12,7 +12,11 @@ import SuccessMsg from '../SuccessMsg';
 
 interface Props {
   level: string;
-  handleCompletedLevel: (level: string, time: number) => Promise<void>;
+  handleCompletedLevel: (
+    level: string,
+    time: number,
+    save: boolean
+  ) => Promise<void>;
   showCountdown: boolean;
   setShowCountdown: React.Dispatch<React.SetStateAction<boolean>>;
   setShowErrorMsg: React.Dispatch<React.SetStateAction<boolean>>;
@@ -100,7 +104,7 @@ const Level: React.FC<Props> = ({
       // FIXME: rearrange logic to add optional saving ability
       setIsStarted(false);
       setShowSuccessMsg(true);
-      handleCompletedLevel(currentLevel, getTime);
+      // handleCompletedLevel(currentLevel, getTime);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getRemainingItems]);
@@ -200,6 +204,8 @@ const Level: React.FC<Props> = ({
           highScores={
             getHighScores?.filter((scores) => scores.level === currentLevel)[0]
           }
+          handleCompletedLevel={handleCompletedLevel}
+          currentLevel={currentLevel}
         />
       )}
     </>

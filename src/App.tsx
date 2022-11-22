@@ -143,10 +143,13 @@ function App() {
     }
   };
 
-  const handleCompletedLevel = async (level: string, time: number) => {
-    // TODO: show success msg
+  const handleCompletedLevel = async (
+    level: string,
+    time: number,
+    save: boolean
+  ) => {
     await updatedCompletedLevels(level);
-    await updateHighScores(level, time);
+    save && (await updateHighScores(level, time));
   };
 
   const updatedCompletedLevels = async (level: string) => {
@@ -190,7 +193,6 @@ function App() {
               return a.time - b.time;
             })
             .slice(0, 3);
-          console.table(newHighScores);
           await updateDoc(docRef, {
             highScores: newHighScores,
           });
