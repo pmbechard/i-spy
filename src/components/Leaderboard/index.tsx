@@ -19,15 +19,15 @@ const Leaderboard: React.FC<Props> = ({ getHighScores }) => {
     const highScores = getHighScores
       ?.filter((scores) => scores.level === getLeaderboardLevel)[0]
       .scores.sort((a, b) => {
-        return a.position.localeCompare(b.position);
+        return a.time - b.time;
       });
     setCurrentScores(highScores);
   }, [getHighScores, getLeaderboardLevel]);
 
-  const getIcon = (position: string) => {
-    if (position === 'first') return goldIcon;
-    if (position === 'second') return silverIcon;
-    if (position === 'third') return bronzeIcon;
+  const getIcon = (index: number) => {
+    if (index === 0) return goldIcon;
+    if (index === 1) return silverIcon;
+    if (index === 2) return bronzeIcon;
     return '';
   };
 
@@ -71,12 +71,16 @@ const Leaderboard: React.FC<Props> = ({ getHighScores }) => {
               </tr>
             </thead>
             <tbody>
-              {currentScores?.map((score) => {
+              {currentScores?.map((score, index) => {
                 return (
-                  <tr key={`${getLeaderboardLevel}-${score.position}`}>
+                  <tr
+                    key={`${getLeaderboardLevel}-${score.username}-${
+                      index + 1
+                    }`}
+                  >
                     <td>
                       <img
-                        src={getIcon(score.position)}
+                        src={getIcon(index)}
                         alt=''
                         className='leaderboard-medal'
                       />

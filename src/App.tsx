@@ -32,10 +32,6 @@ import Countdown from './components/Countdown';
 // Add option to save if ranked in highScores
 // Improve styling
 
-// FIXME:
-// bug in high score rankings
-//    - use .sort() to sort each load instead of store "position" in db
-
 function App() {
   const [getUserInfo, setUserInfo] = useState<User | null>(null);
   const [getCompletedLevels, setCompletedLevels] = useState<string[]>([]);
@@ -179,52 +175,24 @@ function App() {
       if (time < highScores[i].time) {
         const docRef = doc(db, 'levels', level);
         try {
-          let position: string = '';
-          if (i === 2) position = 'first';
-          else if (i === 1) position = 'second';
-          else position = 'third';
-          let username: string = getUserInfo?.displayName || 'Anonymous';
-          const spaceIndex = username.indexOf(' ');
-          if (spaceIndex > 0) username = username.slice(0, spaceIndex + 2);
-          const updatedHighScores: ScoreObject[] = [
-            { position: position, time: time, username: username },
+          let username: string = getUserInfo?.displayName
+            ? getUserInfo?.displayName?.substring(
+                0,
+                getUserInfo?.displayName?.indexOf(' ') + 2
+              )
+            : 'Anon';
+          let newHighScores: ScoreObject[] = [
+            ...highScores,
+            { username: username, time: time },
           ];
-          if (position === 'first') {
-            highScores.forEach((score) => {
-              if (score.position === 'first') {
-                updatedHighScores.push({
-                  position: 'second',
-                  time: score.time,
-                  username: score.username,
-                });
-              } else if (score.position === 'second') {
-                updatedHighScores.push({
-                  position: 'third',
-                  time: score.time,
-                  username: score.username,
-                });
-              }
-            });
-          } else if (position === 'second') {
-            highScores.forEach((score) => {
-              if (score.position === 'first') updatedHighScores.push(score);
-              else if (score.position === 'second') {
-                updatedHighScores.push({
-                  position: 'third',
-                  time: score.time,
-                  username: score.username,
-                });
-              }
-            });
-          } else if (position === 'third') {
-            highScores.forEach((score) => {
-              if (score.position === 'first') updatedHighScores.push(score);
-              else if (score.position === 'second')
-                updatedHighScores.push(score);
-            });
-          }
+          newHighScores = newHighScores
+            .sort((a, b) => {
+              return a.time - b.time;
+            })
+            .slice(0, 3);
+          console.table(newHighScores);
           await updateDoc(docRef, {
-            highScores: updatedHighScores,
+            highScores: newHighScores,
           });
           await fetchHighScores();
         } catch (e) {

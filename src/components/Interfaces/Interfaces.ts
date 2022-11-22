@@ -6,7 +6,6 @@ export interface ItemsObject {
 }
 
 export interface ScoreObject {
-  position: string;
   username: string;
   time: number;
 }
