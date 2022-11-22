@@ -101,10 +101,8 @@ const Level: React.FC<Props> = ({
 
   useEffect(() => {
     if (getRemainingItems && getRemainingItems.items.length === 0) {
-      // FIXME: rearrange logic to add optional saving ability
       setIsStarted(false);
       setShowSuccessMsg(true);
-      // handleCompletedLevel(currentLevel, getTime);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getRemainingItems]);
@@ -123,6 +121,8 @@ const Level: React.FC<Props> = ({
     let y = parseInt(
       (((e.clientY - rect.top) / (rect.bottom - rect.top)) * 100).toFixed(0)
     );
+    // FIXME: delete when done
+    console.log(x, y);
     setClickPos([x, y]);
     setClickMenuIsHidden(false);
   };

@@ -29,7 +29,6 @@ import ErrorMsg from './components/ErrorMsg';
 import Countdown from './components/Countdown';
 
 // TODO:
-// Add option to save if ranked in highScores
 // Improve styling
 
 function App() {
