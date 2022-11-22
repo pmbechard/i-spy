@@ -95,14 +95,14 @@ const SuccessMsg: React.FC<Props> = ({
                   handleCompletedLevel(currentLevel, getTime, true);
                 }}
               >
-                Add High Score
+                Save
               </button>
               <button
                 onClick={() => {
                   handleCompletedLevel(currentLevel, getTime, false);
                 }}
               >
-                Discard High Score
+                Discard
               </button>
             </div>
           )}

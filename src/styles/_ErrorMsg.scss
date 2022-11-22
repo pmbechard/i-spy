@@ -33,6 +33,13 @@
       h2 {
         margin-bottom: 10px;
       }
+
+      .save-score-options {
+        button {
+          margin: 20px;
+          @include hoverActive();
+        }
+      }
     }
   }
 }

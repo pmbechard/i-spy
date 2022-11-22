@@ -413,6 +413,18 @@ footer img:active {
 .error-msg-container .error-msg-card .error-msg h2 {
   margin-bottom: 10px;
 }
+.error-msg-container .error-msg-card .error-msg .save-score-options button {
+  margin: 20px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
+  cursor: pointer;
+}
+.error-msg-container .error-msg-card .error-msg .save-score-options button:hover {
+  opacity: 1;
+}
+.error-msg-container .error-msg-card .error-msg .save-score-options button:active {
+  transform: scale(0.99);
+}
 
 .countdown-container {
   height: 100vh;
