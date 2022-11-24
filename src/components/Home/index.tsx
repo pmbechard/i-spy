@@ -5,16 +5,14 @@ import lvl3Icon from '../../img/lvl-3.png';
 import lockedIcon from '../../img/locked.png';
 import Leaderboard from '../Leaderboard';
 import { ScoreCollection } from '../Interfaces/Interfaces';
+import MagnifyingGlass from '../MagnifyingGlass';
 
 interface Props {
   getCompletedLevels: string[];
   getHighScores: ScoreCollection[] | undefined;
 }
 
-const Home: React.FC<Props> = ({
-  getCompletedLevels,
-  getHighScores,
-}) => {
+const Home: React.FC<Props> = ({ getCompletedLevels, getHighScores }) => {
   return (
     <section>
       <h2>Choose a level to play</h2>
@@ -22,6 +20,7 @@ const Home: React.FC<Props> = ({
         <Link to='1' className='link level-btn'>
           <img src={lvl1Icon} alt='' />
         </Link>
+        <MagnifyingGlass />
         {getCompletedLevels.includes('1') ? (
           <Link to='2' className='link level-btn'>
             <img src={lvl2Icon} alt='' />
