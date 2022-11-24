@@ -2,10 +2,7 @@ header {
   aspect-ratio: 900/600;
   width: 100%;
   height: $headerHeight;
-  background-image: url('../img/header-bg.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-color: $darkest;
 
   @include fCentre();
   align-items: flex-start;

@@ -1,5 +1,5 @@
 section {
-  background-color: #b9b9b9;
+  background-color: $light;
   height: calc($bodyHeight + 20vh);
   @include fCentre(column);
   justify-content: flex-start;

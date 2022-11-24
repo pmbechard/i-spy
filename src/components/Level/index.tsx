@@ -121,8 +121,7 @@ const Level: React.FC<Props> = ({
     let y = parseInt(
       (((e.clientY - rect.top) / (rect.bottom - rect.top)) * 100).toFixed(0)
     );
-    // FIXME: delete when done
-    console.log(x, y);
+    // console.log(x, y);
     setClickPos([x, y]);
     setClickMenuIsHidden(false);
   };

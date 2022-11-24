@@ -1,5 +1,5 @@
 footer {
-  background-color: #404040;
+  background-color: $dark;
   height: $footerHeight;
   @include fCentre();
   color: $light;
