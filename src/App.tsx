@@ -259,7 +259,7 @@ function App() {
                 }
               />
               <Route
-                path='*'
+                path='/*'
                 element={
                   <Home
                     getCompletedLevels={getCompletedLevels}
@@ -270,7 +270,7 @@ function App() {
             </>
           ) : (
             <Route
-              path=''
+              path='/*'
               element={
                 <div className='login-prompt'>
                   <button onClick={signIn}>Sign in to play</button>
