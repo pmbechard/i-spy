@@ -31,7 +31,7 @@ const Home: React.FC<Props> = ({ getCompletedLevels, getHighScores }) => {
         ) : (
           <div className='disabled-level-container'>
             <img src={lvl2Img} alt='' className='disabled-level' />
-            <img src={lockedIcon} alt='' className='level-status' />
+            <img src={lockedIcon} alt='' className='level-number disabled' />
           </div>
         )}
         {getCompletedLevels.includes('2') ? (
@@ -42,7 +42,7 @@ const Home: React.FC<Props> = ({ getCompletedLevels, getHighScores }) => {
         ) : (
           <div className='disabled-level-container'>
             <img src={lvl3Img} alt='' className='disabled-level' />
-            <img src={lockedIcon} alt='' className='level-status' />
+            <img src={lockedIcon} alt='' className='level-number disabled' />
           </div>
         )}
       </div>

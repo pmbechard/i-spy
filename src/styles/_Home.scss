@@ -15,7 +15,8 @@ section {
     gap: 2.5vw;
     margin-bottom: 10vh;
 
-    .level-btn {
+    .level-btn,
+    .disabled-level-container {
       position: relative;
       @include hoverActive();
       border: 5px solid $darkest;
@@ -49,14 +50,12 @@ section {
     .disabled-level-container {
       opacity: 0.4;
       position: relative;
-    }
+      cursor: auto;
 
-    .level-status {
-      position: absolute;
-      right: 10px;
-      bottom: 5px;
-      width: 32px;
-      height: auto;
+      &:hover {
+        opacity: 0.4;
+        transform: scale(1);
+      }
     }
   }
 
