@@ -2,7 +2,7 @@
   "name": "i-spy",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://pmbechard.github.io/i-spy",
+  "homepage": "http://pmbechard.github.io/i-spy",
   "dependencies": {
     "@react-three/drei": "^9.43.3",
     "@react-three/fiber": "^8.9.1",
