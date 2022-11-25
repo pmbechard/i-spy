@@ -1,25 +1,34 @@
-import React from 'react';
-import { useGLTF } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import React, { Suspense, useRef } from 'react';
+import { useLoader, useFrame } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from '@react-three/drei';
 
 const MagnifyingGlass = () => {
-  const Model = () => {
-    const gltf = useGLTF('./magnifying-glass.glb', true);
-    return <primitive object={gltf.scene} dispose={null} scale={0.6} />;
-  };
+  const modelPath = './magnifying-glass.glb';
+  const position = [0, 0, 0];
+  const ref = useRef<any>(null);
+  const gltf = useLoader(GLTFLoader, modelPath);
+
+  // Subscribe this component to the render-loop, rotate the mesh every frame
+  useFrame((state, delta) => {
+    if (ref.current) ref.current.rotation.y += 0.012;
+  });
+
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: '50px',
-        height: '50px',
-        zIndex: '5',
-      }}
-    >
-      <Canvas>
-        <Model />
-      </Canvas>
-    </div>
+    <>
+      <ambientLight intensity={0.3} />
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+      <pointLight position={[-10, -10, -10]} />
+      <Suspense fallback={null}>
+        <primitive
+          ref={ref}
+          object={gltf.scene}
+          position={position}
+          scale={0.45}
+        />
+        <OrbitControls />
+      </Suspense>
+    </>
   );
 };
 

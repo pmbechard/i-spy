@@ -1,13 +1,27 @@
 header {
-  aspect-ratio: 900/600;
   width: 100%;
   height: $headerHeight;
-  background-color: $darkest;
+  background-color: $dark;
 
   @include fCentre();
-  align-items: flex-start;
   justify-content: space-between;
-  padding: 40px 60px;
+  padding: 20px 60px;
+
+  .title-logo-area {
+    @include fCentre();
+    align-items: center;
+    margin-top: 40px;
+
+    .canvas-container {
+      width: 150px;
+      height: 150px;
+      cursor: grab;
+    }
+
+    .link {
+      padding-bottom: 40px;
+    }
+  }
 
   .header-title {
     font-size: 56px;
