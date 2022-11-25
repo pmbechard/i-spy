@@ -148,7 +148,7 @@ const Level: React.FC<Props> = ({
     <>
       <div className='level-container'>
         <div className='level-info'>
-          <h1>Level {level}</h1>
+          <h1 className='area-heading'>LEVEL {level}</h1>
           <div className='search-info'>
             <h2>You are looking for...</h2>
             <div className='search-items'>

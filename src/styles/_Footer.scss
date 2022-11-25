@@ -1,8 +1,8 @@
 footer {
-  background-color: $dark;
+  background-color: $light;
   height: $footerHeight;
   @include fCentre();
-  color: $light;
+  color: $darkest;
   font-size: 14px;
 
   img {

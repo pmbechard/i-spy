@@ -24,13 +24,18 @@
   overscroll-behavior-y: none;
 }
 
+body {
+  font-size: 18px;
+}
+
 button {
   padding: 10px 20px;
   background: $lightest;
-  border: 1px solid $darkest;
+  border: 2px solid $darkest;
   color: $darkest;
   font-weight: 900;
   border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
   @include hoverActive;
 }

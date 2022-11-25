@@ -26,7 +26,7 @@ const MagnifyingGlass = () => {
           position={position}
           scale={0.45}
         />
-        <OrbitControls />
+        <OrbitControls enableZoom={false} enablePan={false} />
       </Suspense>
     </>
   );

@@ -1,5 +1,10 @@
 .leaderboard-container {
   @include fCentre(column);
+  margin-bottom: 10vh;
+  border: 3px solid $darkest;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: $darkest;
 
   .leaderboard-tabs {
     @include fCentre();

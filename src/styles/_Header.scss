@@ -1,8 +1,7 @@
 header {
   width: 100%;
-  height: $headerHeight;
-  background-color: $dark;
-
+  height: 15vh;
+  background-color: $light;
   @include fCentre();
   justify-content: space-between;
   padding: 20px 60px;
@@ -26,7 +25,7 @@ header {
   .header-title {
     font-size: 56px;
     font-family: $headerFont;
-    color: #ededed;
+    color: $darkest;
   }
 
   .signed-in {
@@ -34,7 +33,7 @@ header {
     gap: 40px;
 
     p {
-      color: $light;
+      color: $darkest;
     }
   }
 }
