@@ -1,11 +1,85 @@
 @media screen and (max-width: 750px) {
   header {
-    flex-wrap: wrap;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+
+    .title-logo-area {
+      flex-direction: column-reverse;
+      margin: 0;
+
+      .canvas-container {
+        width: 200px;
+        height: 200px;
+        cursor: grab;
+        margin: -50px;
+      }
+    }
+
+    border-bottom: 2px solid $darkest;
   }
 
-  .level-btn,
-  .disabled-level-container {
-    width: 90vw;
-    height: 20vh;
+  section {
+    .levels-area {
+      .level-btn,
+      .disabled-level-container {
+        width: 90vw;
+        height: 20vh;
+      }
+    }
+  }
+  section .levels-area .level-btn img:not(.level-number) {
+    width: 100%;
+    height: 100%;
+  }
+  section .levels-area .disabled-level-container img:not(.level-number) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .leaderboard-container {
+    width: 95vw;
+
+    .leaderboard-tabs {
+      .leaderboard-tab {
+        padding: 10px;
+        width: calc(90vw / 3);
+      }
+    }
+
+    table {
+      width: 90vw;
+    }
+  }
+
+  footer {
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .level-container {
+    .level-info {
+      .search-items {
+        gap: 5px;
+        padding: 5px;
+        .search-item {
+          padding: 5px;
+        }
+      }
+    }
+  }
+  .selection-menu {
+    .selection-menu-dropdown {
+      .selection-dropdown-item {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .error-msg-container {
+    .error-msg-card {
+      width: 95vw;
+      gap: 10px;
+    }
   }
 }

@@ -20,28 +20,28 @@ const Home: React.FC<Props> = ({ getCompletedLevels, getHighScores }) => {
       <h2 className='area-heading'>Levels</h2>
       <div className='levels-area'>
         <Link to='1' className='link level-btn'>
-          <img src={lvl1Img} alt='' />
+          <img src={lvl1Img} alt='' className='level-bg-img' />
           <img src={lvl1Icon} className='level-number' alt='1' />
         </Link>
         {getCompletedLevels.includes('1') ? (
           <Link to='2' className='link level-btn'>
-            <img src={lvl2Img} alt='' />
+            <img src={lvl2Img} alt='' className='level-bg-img' />
             <img src={lvl2Icon} className='level-number' alt='2' />
           </Link>
         ) : (
           <div className='disabled-level-container'>
-            <img src={lvl2Img} alt='' className='disabled-level' />
+            <img src={lvl2Img} alt='' className='disabled-level level-bg-img' />
             <img src={lockedIcon} alt='' className='level-number disabled' />
           </div>
         )}
         {getCompletedLevels.includes('2') ? (
           <Link to='3' className='link level-btn'>
-            <img src={lvl3Img} alt='' />
+            <img src={lvl3Img} alt='' className='level-bg-img' />
             <img src={lvl3Icon} className='level-number' alt='3' />
           </Link>
         ) : (
           <div className='disabled-level-container'>
-            <img src={lvl3Img} alt='' className='disabled-level' />
+            <img src={lvl3Img} alt='' className='disabled-level level-bg-img' />
             <img src={lockedIcon} alt='' className='level-number disabled' />
           </div>
         )}
