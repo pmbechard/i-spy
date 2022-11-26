@@ -1,0 +1,11 @@
+@media screen and (max-width: 750px) {
+  header {
+    flex-wrap: wrap;
+  }
+
+  .level-btn,
+  .disabled-level-container {
+    width: 90vw;
+    height: 20vh;
+  }
+}
